@@ -27,8 +27,7 @@
 
 <a class="btn orange" href="./Morolity-and-Law" target="_self">点击跳转道德与法治</a>
 
-# 错题本
+道德与法治功能如下：
 
-<a class="btn" href="./Review" target="_self">点击跳转错题本</a>
-
-您可以在其中收录您的错题！
+1. 选择题相关知识点背诵。
+1. 材料题、大题知识点背诵。
