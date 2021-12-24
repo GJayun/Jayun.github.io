@@ -1,5 +1,5 @@
 $().ready(function() {
 	$(".load").remove();
-	$(".home").removeClass("display");
-	$("#app").removeClass("display");
+	$(".home").css("display", "");
+	$("#app").css("display", "");
 });
