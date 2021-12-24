@@ -1,0 +1,15 @@
+# 道德与法治
+
+在本项目中，您可复习选择题的重要知识点和非选择题的提纲。
+
+## 选择题
+
+**主要功能**：给定一个题目默写答案。
+
+<a class="btn blue" href="./Multiple-choice" target="_self">开始选择题复习</a>
+
+## 非选择题
+
+**主要功能**：给定一个题目默写答案。
+
+<a class="btn green" href="./Non-Multiple-choice" target="_self">开始非选择题复习</a>
