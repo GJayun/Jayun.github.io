@@ -4,7 +4,7 @@
     
     md.use(mk);
 
-    window.οnlοad = function() {
+    $().ready(function() {
         $(`
             <div class="container">
                 <div class="atc-index-content atc-center" id="atcboard" style="padding: 0px !important">
@@ -14,7 +14,7 @@
         $(`
             <div id="article">
             </div>
-        `).appendTo("#atcboard");
+        `).appendTo("#atcboard");       
         
         var output = document.getElementById('article');
         var result;
@@ -22,7 +22,7 @@
             result = md.render(data);
             output.innerHTML = result;
         });
-    };
+    });
 
     /*
     
