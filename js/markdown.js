@@ -4,25 +4,25 @@
     
     md.use(mk);
 
-    $().ready(function() {
-        $(`
-            <div class="container">
-                <div class="atc-index-content atc-center" id="atcboard" style="padding: 0px !important">
-                </div>
-            </div>
-        `).appendTo("#app");
-        $(`
-            <div id="article">
-            </div>
-        `).appendTo("#atcboard");       
+    window.onload = function() {
+        // $(`
+        //     <div class="container">
+        //         <div class="atc-index-content atc-center" id="atcboard" style="padding: 0px !important">
+        //         </div>
+        //     </div>
+        // `).appendTo("#app");
+        // $(`
+        //     <div id="article">
+        //     </div>
+        // `).appendTo("#atcboard");
         
-        var output = document.getElementById('article');
-        var result;
-        $.get("./index.txt",function(data){
-            result = md.render(data);
-            output.innerHTML = result;
-        });
-    });
+        // var output = document.getElementById('article');
+        // var result;
+        // $.get("./index.txt",function(data){
+        //     result = md.render(data);
+        //     output.innerHTML = result;
+        // });
+    };
 
     /*
     
