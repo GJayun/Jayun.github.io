@@ -3,6 +3,20 @@ body{
 	background-color: #f5f6f7;
 }
 
+.load { 
+    height: 100vh;
+    position: relative;
+}
+
+.load div {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 #app {
 	margin: 0 auto;
 	min-height: 100vh;
