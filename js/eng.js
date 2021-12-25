@@ -7,6 +7,42 @@
     md.use(mk);
 
     $().ready(function() {
+        $(`<style>
+            .problem-settings {
+                position: relative;
+                display: inline-block;
+                padding: 1px 5px 1px 5px;
+                background-color: white;
+                border: 1px solid #6495ED;
+                color: cornflowerblue;
+                border-radius: 6px;
+                font-size: 12px;
+                position: relative;
+                top: -2px;
+            }
+            .problem-settings.selected {
+                background-color: cornflowerblue;
+                border: 1px solid #6495ED;
+                color: white;
+            }
+            .problem-settings:hover {
+                box-shadow: 0 0 7px dodgerblue;
+            }
+            .window {
+                position: absolute;
+                top: 35px;
+                left: 0px;
+                z-index: 65536;
+                display: none;
+                width: 250px;
+                height: 300px;
+                padding: 5px;
+                background: white;
+                color: black;
+                border-radius: 7px;
+                box-shadow: rgb(187 227 255) 0px 0px 7px;
+            }
+        </style>`).appendTo("head");
         $(`
             <div class="container">
                 <div class="atc-index-content atc-center" id="atcboard" style="padding: 0px !important">
@@ -26,14 +62,31 @@
         </span>
         `).appendTo("#article");
 
-        // const $ul = $board.children("ul").css("list-style-type", "none");
-        // const $menu = $(`<div id="menu"></div>`).appendTo($ul);
-        // $("<br>").appendTo($ul);
-
         var output = document.getElementById('article');
         var result;
         $.get("/English/p.json",function(data){
-            console.log(data);
+            const $ul = $board.children("ul").css("list-style-type", "none");
+            const $menu = $(`<div id="menu"></div>`).appendTo($ul);
+            $("<br>").appendTo($ul);
+            const $menuarr = [], $entries = [];
+            for (var i = 0; i < data.length; i++) {
+                if (i == 0) 
+                    $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul));
+                $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul).hide());
+                $entries.push($(`<div class="problem-settings am-unselectable problem-entry">${data[i].name}</div>`).appendTo($menu));
+            }
+            $entries[0].after($(`<span class="am-unselectable">&nbsp;&nbsp;</span>`));
+            $entries[0].addClass("selected").css("margin-right", "38px");
+
+            for (var i = 0; i < data.length; i++) {
+                $entries[i].on("click", () => {
+                    $(".problem-entry").removeClass("selected");
+                    $entries[i].addClass("selected");
+                    $(".smallbtn-list").hide();
+                    $menuarr[i].show();
+                });
+            }
+
             // result = md.render(data);
             // output.innerHTML = result;
         });
