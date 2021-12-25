@@ -103,14 +103,14 @@
             const $menu = $(`<div id="menu"></div>`).appendTo($ul);
             $("<br>").appendTo($ul);
             const $menuarr = [], $entries = [], chdata = [];
-            for (var i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.arr.length; i++) {
                 if (i == 0) 
                     $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul));
                 $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul).hide());
-                $entries.push($(`<div class="problem-settings am-unselectable problem-entry">${data[i].name}</div>`).appendTo($menu));
+                $entries.push($(`<div class="problem-settings am-unselectable problem-entry">${data.arr[i].name}</div>`).appendTo($menu));
                 $entries[i].after($(`<span class="am-unselectable">&nbsp;&nbsp;</span>`));
                 let tmp = [];
-                for (var j = 0; j < data[i].arr.length; j++) {
+                for (var j = 0; j < data.arr[i].arr.length; j++) {
                     tmp.push(0);
                 }
                 chdata.push(tmp);
@@ -149,9 +149,9 @@
                 })
             }
 
-            for (var i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.arr.length; i++) {
                 clickmenu([$entries[i], $menuarr[i]]);
-                clickitem([$menuarr[i], data[i].arr, chdata[i]]);
+                clickitem([$menuarr[i], data.arr[i].arr, chdata[i]]);
             }
             
 
