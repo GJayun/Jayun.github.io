@@ -1,6 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-    $.double = (func, first, second) => [func(first), func(second)]
-    
+        
     var md = require('markdown-it')(),
         mk = require('./index');
     
@@ -30,18 +29,54 @@
             }
             .window {
                 position: absolute;
-                top: 35px;
-                left: 0px;
+                margin-top: 15px;
                 z-index: 65536;
-                display: none;
-                width: 250px;
+                width: 500px;
                 height: 300px;
                 padding: 5px;
                 background: white;
                 color: black;
                 border-radius: 7px;
-                box-shadow: rgb(187 227 255) 0px 0px 7px;
             }
+
+            .am-smallbtn {
+                position: relative;
+                display: inline-block;
+                padding: 1px 5px 1px;
+                color: white;
+                border-radius: 6px;
+                font-size: 12px;
+                margin-left: 1px;
+                margin-right: 1px;
+            }
+
+            .am-unselectable {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -o-user-select: none;
+                user-select: none;
+            }
+
+            .problem-enabled{
+                width: 49%;
+                float: left;
+            }
+            .problem-disabled{
+                width: 49%;
+                float: right;
+            }
+
+            .small {
+                font-size: 10px;
+                color: #7f7f7f;
+            }
+            
+            .inline-up {
+                display: inline-block;
+                vertical-align: top;
+                margin-right: 10px;
+            }
+
         </style>`).appendTo("head");
         $(`
             <div class="container">
@@ -51,42 +86,74 @@
         `).appendTo("#app");
         $(`
             <div id="article">
-                <p>请在选项中选择单词范围！</p>
-                
+                <p>请在选项中选择单词范围。如果已选择合适的范围，请按“开始”按钮。</p>
             </div>
         `).appendTo("#atcboard");       
         
-        const $board = $(`<span id="congnition-window" class="window">
+        const $board = $(`<span class="window">
             <br>
             <ul></ul>
         </span>
-        `).appendTo("#article");
+        `).appendTo("#atcboard");
 
         var output = document.getElementById('article');
         var result;
         $.get("/English/p.json",function(data){
-            console.log(data);
             const $ul = $board.children("ul").css("list-style-type", "none");
             const $menu = $(`<div id="menu"></div>`).appendTo($ul);
             $("<br>").appendTo($ul);
-            const $menuarr = [], $entries = [];
+            const $menuarr = [], $entries = [], chdata = [];
             for (var i = 0; i < data.length; i++) {
                 if (i == 0) 
                     $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul));
                 $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul).hide());
                 $entries.push($(`<div class="problem-settings am-unselectable problem-entry">${data[i].name}</div>`).appendTo($menu));
+                $entries[i].after($(`<span class="am-unselectable">&nbsp;&nbsp;</span>`));
+                let tmp = [];
+                for (var j = 0; j < data[i].arr.length; j++) {
+                    tmp.push(0);
+                }
+                chdata.push(tmp);
             }
-            $entries[0].after($(`<span class="am-unselectable">&nbsp;&nbsp;</span>`));
-            $entries[0].addClass("selected").css("margin-right", "38px");
+            $entries[0].addClass("selected");
 
-            for (var i = 0; i < data.length; i++) {
-                $entries[i].on("click", () => {
+            function clickmenu ([$entry, $div]) {
+                $entry.on("click", () => {
                     $(".problem-entry").removeClass("selected");
-                    $entries[i].addClass("selected");
+                    $entry.addClass("selected");
                     $(".smallbtn-list").hide();
-                    $menuarr[i].show();
+                    $div.show();
                 });
             }
+
+            $.double = (func, first, second) => [func(first), func(second)]
+
+            function clickitem ([$parent, obj_list, mlist]) {
+                const $lists = $.double(([classname, desctext]) => $(`<span class="${classname}">
+                <span class="small inline-up am-unselectable">${desctext}</span>
+                <br>
+                </span>`).appendTo($parent), ["problem-enabled", "已选择"], ["problem-disabled", "未选择"])
+
+                console.log(mlist);
+
+                obj_list.forEach((obj, index) => {
+                    const $btn = $.double(($p) => $(`<div class="am-smallbtn am-unselectable">${obj.name}</div>`).css("background-color", `#3498db`).appendTo($p), $lists[0], $lists[1])
+                    $.double((b) => {
+                        $btn[b].on("click", () => {
+                            $btn[b].hide()
+                            $btn[1 - b].show()
+                            mlist[index] = !! b
+                        })
+                        if (mlist[index] == (!! b)) $btn[b].hide()
+                    }, 0, 1)
+                })
+            }
+
+            for (var i = 0; i < data.length; i++) {
+                clickmenu([$entries[i], $menuarr[i]]);
+                clickitem([$menuarr[i], data[i].arr, chdata[i]]);
+            }
+            
 
             // result = md.render(data);
             // output.innerHTML = result;
