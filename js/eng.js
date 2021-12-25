@@ -65,6 +65,7 @@
         var output = document.getElementById('article');
         var result;
         $.get("/English/p.json",function(data){
+            console.log(data);
             const $ul = $board.children("ul").css("list-style-type", "none");
             const $menu = $(`<div id="menu"></div>`).appendTo($ul);
             $("<br>").appendTo($ul);
