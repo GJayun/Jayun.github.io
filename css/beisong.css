@@ -49,6 +49,10 @@ body{
     font-size: 0.67em;
 }
 
+.word {
+    font-size: 4em;
+    text-align: center;
+}
 
 .container {
 	width: 1127px; 
