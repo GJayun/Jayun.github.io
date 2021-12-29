@@ -8,13 +8,14 @@
     $().ready(function() {
         $(`<style>
             .problem-settings {
+                cursor: pointer;
                 position: relative;
                 display: inline-block;
                 padding: 1px 5px 1px 5px;
                 background-color: white;
                 border: 1px solid #6495ED;
                 color: cornflowerblue;
-                border-radius: 6px;
+                border-radius: 3px;
                 font-size: 12px;
                 position: relative;
                 top: -2px;
@@ -24,14 +25,11 @@
                 border: 1px solid #6495ED;
                 color: white;
             }
-            .problem-settings:hover {
-                box-shadow: 0 0 7px dodgerblue;
-            }
             .window {
                 position: absolute;
                 margin-top: 15px;
                 z-index: 65536;
-                width: 500px;
+                width: 1100px;
                 height: 300px;
                 padding: 5px;
                 background: white;
@@ -40,11 +38,12 @@
             }
 
             .am-smallbtn {
+                cursor: pointer;
                 position: relative;
                 display: inline-block;
                 padding: 1px 5px 1px;
                 color: white;
-                border-radius: 6px;
+                border-radius: 3px;
                 font-size: 12px;
                 margin-left: 1px;
                 margin-right: 1px;
@@ -90,6 +89,8 @@
             </div>
         `).appendTo("#atcboard");       
         
+        $st = $(`<button class="btn" style="float: right;">开始</button>`).appendTo("#article > p");
+
         const $board = $(`<span class="window">
             <br>
             <ul></ul>

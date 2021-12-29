@@ -17,3 +17,27 @@
 在这一个子项目中，您可先选择您所背诵单词的范围（如第几册第几单元），然后点击“开始”按钮，系统将智能地随机推送单词，您需要默写它的英文。
 
 <a class="btn green" href="./Recitation" target="_self">开始单词背诵</a>
+
+## 英语相关资料：
+
+英语词性缩写：
+1. $prep$：介系词；前置词，$\text{preposition}$ 的缩写
+1. $pron$：代名词，$\text{pronoun}$ 的缩写
+1. $n$： 名词，$\text{noun}$ 的缩写
+1. $v$： 动词，兼指及物动词和不及物动词，$\text{verb}$ 的缩写
+1. $conj$： 连接词 ，$\text{conjunction}$ 的缩写
+1. $s$： 主词
+1. $sc$： 主词补语
+1. $o$： 受词
+1. $oc$： 受词补语
+1. $vi$： 不及物动词，$\text{intransitive verb}$ 的缩写
+1. $vt$： 及物动词，$\text{transitive verb}$ 的缩写
+1. $auxv$： 助动词 ，$\text{auxiliary}$ 的缩写
+1. $a$： 形容词，$\text{adjective}$ 的缩写
+1. $ad$： 副词，$\text{adverb}$ 的缩写
+1. $art$： 冠词，$\text{article}$ 的缩写
+1. $num$： 数词，$\text{numeral}$ 的缩写
+1. $int$： 感叹词，$\text{interjection}$ 的缩写
+1. $u$： 不可数名词，$\text{uncountable noun}$ 的缩写
+1. $c$： 可数名词，$\text{countable noun}$ 的缩写
+1. $pl$： 复数，$\text{plural}$ 的缩写
