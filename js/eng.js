@@ -92,7 +92,7 @@
         $st = $(`<button class="btn" style="float: right;">开始</button>`).appendTo("#article > p");
 
         const $board = $(`<span class="window">
-            <br>
+            
             <ul></ul>
         </span>
         `).appendTo("#atcboard");
