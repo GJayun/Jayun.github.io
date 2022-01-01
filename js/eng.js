@@ -205,9 +205,9 @@
 
                 if (!ques.length) {
                     Swal.fire(
-                        'Good job!',
-                        'You clicked the button!',
-                        'success'
+                        '很抱歉',
+                        '请先选择题目范围！',
+                        'error'
                       )
                     // alert("请先选择范围！")
                 } else {
