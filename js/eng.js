@@ -28,7 +28,6 @@
             .window {
                 position: absolute;
                 margin-top: 15px;
-                z-index: 65536;
                 width: 1100px;
                 height: 300px;
                 padding: 5px;
@@ -83,7 +82,8 @@
                 </div>
             </div>
         `).appendTo("#app");
-        $(`
+        
+        const $pboard = $(`
             <div id="article">
                 <p>请在选项中选择单词范围。如果已选择合适的范围，请按“开始”按钮。</p>
             </div>
@@ -103,19 +103,27 @@
             const $ul = $board.children("ul").css("list-style-type", "none");
             const $menu = $(`<div id="menu"></div>`).appendTo($ul);
             $("<br>").appendTo($ul);
-            const $menuarr = [], $entries = [], chdata = [];
+            let $menuarr = [], $entries = [], chdata = [];
+
             for (var i = 0; i < data.arr.length; i++) {
                 if (i == 0) 
                     $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul));
                 $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul).hide());
                 $entries.push($(`<div class="problem-settings am-unselectable problem-entry">${data.arr[i].name}</div>`).appendTo($menu));
                 $entries[i].after($(`<span class="am-unselectable">&nbsp;&nbsp;</span>`));
-                let tmp = [];
-                for (var j = 0; j < data.arr[i].arr.length; j++) {
-                    tmp.push(0);
+                if (!localStorage.English) {
+                    let tmp = [];
+                    for (var j = 0; j < data.arr[i].arr.length; j++) {
+                        tmp.push(false);
+                    }
+                    chdata.push(tmp);
                 }
-                chdata.push(tmp);
             }
+
+            if (localStorage.English) {
+                chdata = JSON.parse(localStorage.English);
+            }
+
             $entries[0].addClass("selected");
 
             function clickmenu ([$entry, $div]) {
@@ -135,8 +143,6 @@
                 <br>
                 </span>`).appendTo($parent), ["problem-enabled", "已选择"], ["problem-disabled", "未选择"])
 
-                console.log(mlist);
-
                 obj_list.forEach((obj, index) => {
                     const $btn = $.double(($p) => $(`<div class="am-smallbtn am-unselectable">${obj.name}</div>`).css("background-color", `#3498db`).appendTo($p), $lists[0], $lists[1])
                     $.double((b) => {
@@ -144,6 +150,7 @@
                             $btn[b].hide()
                             $btn[1 - b].show()
                             mlist[index] = !! b
+                            localStorage.setItem("English", JSON.stringify(chdata));
                         })
                         if (mlist[index] == (!! b)) $btn[b].hide()
                     }, 0, 1)
@@ -154,7 +161,59 @@
                 clickmenu([$entries[i], $menuarr[i]]);
                 clickitem([$menuarr[i], data.arr[i].arr, chdata[i]]);
             }
+
+            var ques = [];
+
+            function startproblem () {
+                $pboard.empty();
+                $board.remove();
+
+                $problemboard = $(`
+                    <p style="font-size: 2em;"></p>
+                `).appendTo($pboard);
+                
+                var len = ques.length - 1;
+                $problem = $(md.render(`$$\\text{${ques[len].ac[0]}}$$`)).appendTo($problemboard);
+
+                $wanswer = [], $aanswer = $(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${ques[len].ac[0]}</button>`);
+                let index = Math.floor(Math.random() * 4);
+                for (var i = 0; i < ques[len].wr.length; i++) {
+                    if (index == i) $aanswer.appendTo($pboard);
+                    $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${ques[len].wr[i]}</button>`).appendTo($pboard));
+                }
+                if (index == 3) $aanswer.appendTo($pboard);
+            }
             
+            $st.click(() => {
+                for (var i = 0; i < data.arr.length; i++) {
+                    for (var j = 0; j < chdata[i].length; j++)
+                        for (var k = 0; k < data.arr[i].arr[j].arr.length; k++)
+                            if (chdata[i][j]) ques.push(data.arr[i].arr[j].arr[k]);
+                }
+
+                function randArr(arr) {
+                    for (var i = 0; i < arr.length; i++) {
+                        var iRand = parseInt(arr.length * Math.random());
+                        var temp = arr[i];
+                        arr[i] = arr[iRand];
+                        arr[iRand] = temp;
+                    }
+                    return arr;
+                }
+
+                ques = randArr(ques);
+
+                if (!ques.length) {
+                    Swal.fire(
+                        'Good job!',
+                        'You clicked the button!',
+                        'success'
+                      )
+                    // alert("请先选择范围！")
+                } else {
+                    startproblem();
+                }
+            })
 
             // result = md.render(data);
             // output.innerHTML = result;

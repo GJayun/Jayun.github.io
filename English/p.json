@@ -1,67 +1,102 @@
-{"name": "English", "arr": [
-    {"name": "中考单词", "arr": [
-        {"name": "A", "arr": [
-            {
-                "en": ["ability"],
-                "zh": "$n.$ 能力；才能",
-                "wr": ["$a.$ 能够；有能力的", "$n.$ 活动", "$n.$ 无能；残疾"]
-            },
-            {
-                "en": ["able"],
-                "zh": "$a.$ 能够；有能力的",
-                "wr": ["$a.$ 能够；有能力的", "$n.$ 桌子", "$a.$ 有营养的"]
-            },
-            {
-                "en": ["about"],
-                "zh": "$ad.$ 大约；到处；四处；$prep.$ 关于；在各处；四处",
-                "wr": ["$prep.$ 在……上面", "$v.$ 采用", "$v.$ 适应"]
-            },
-            {
-                "en": ["abroad"],
-                "zh": "$ad.$ 到国外",
-                "wr": ["$ad.$ 在（船；飞机）上", "$a.$ 宽广的", "$n.$ 板；木板"]
-            },
-            {
-                "en": ["absent"],
-                "zh": "$a.$ 缺席；不在",
-                "wr": ["$n.$ 口音；音调", "$vt.$ 接受", "$v.$ 登高；升高"]
-            },
-            {
-                "en": ["accent"],
-                "zh": "$n.$ 口音；音调",
-                "wr": ["$a.$ 缺席；不在", "$vt.$ 接受", "$v.$ 登高；升高"]
-            },
-            {
-                "en": ["accept"],
-                "zh": "$vt.$ 接受",
-                "wr": ["$a.$ 缺席；不在", "$n.$ 口音；音调", "$v.$ 登高；升高"]
-            },
-            {
-                "en": ["accident"],
-                "zh": "$n.$ 事故；意外",
-                "wr": ["$a.$ 缺席；不在", "$n.$ 口音；音调", "$vt.$ 接受"]
-            },
-            {
-                "en": ["ache"],
-                "zh": "$vi.$ 痛；疼痛",
-                "wr": ["$vt.$ 吃", "$n.$ 法令；条例；$v.$（戏）表演；行动", "$v.$ 解雇；开除；$n.$ 斧"]
-            },
-            {
-                "en": ["achieve"],
-                "zh": "$vt.$ 达到；取得",
-                "wr": ["$vi.$ 痛；疼痛", "$n.$ 法令；条例；$v.$（戏）表演；行动", "$vt.$ 接受"]
-            },
-            {
-                "en": ["across"],
-                "zh": "$prep.$ 横过；穿过",
-                "wr": ["$vt.$ 交叉；穿越", "$n.$ 地址；住址", "$v.$ 值（多少钱）；花费；$n.$ 价格"]
-            },
-            {
-                "en": ["act"],
-                "zh": "$n.$ 法令；条例；$v.$（戏）表演；行动",
-                "wr": ["$n.$ 艺术；美术；技艺", "$prep.$ 在（几点钟）", "$v.$ 值（多少钱）；花费；$n.$ 价格"]
-            }
-        ]}
-    ]},
-    {"name": "牛津词典（暂无数据）", "arr": []} 
-]}
+{"name": "English", 
+    "word": {
+        "ability": {
+            "ch": "$n.$ 能力；才能",
+            "so": "$\\text{able}$（能够）+$\\text{ty}（名词后缀）$"
+        },
+        "able": {
+            "zh": "$a.$ 能够；有能力的",
+            "so": "比较级：$\\text{abler}，最高级：$\\text{ablest}"
+        },
+        "about": {
+            "zh": "$ad.$ 大约；到处；四处；$prep.$ 关于；在各处；四处；$a.$ 在附近的"
+        },
+        "abroad": {
+            "zh": "$ad.$ 到国外；$a.$ 往国外的；$n.$ 异国"
+        },
+        "absent": {
+            "zh": "$a.$ 缺席的；不在；$vt.$ 缺席"
+        },
+        "accent": {
+            "zh": "$n.$ 口音；音调；$vt.$ 着重；强调"
+        },
+        "accept": {
+            "zh": "$vt.$ 接受"
+        },
+        "accident": {
+            "zh": "$n.$ 事故；意外"
+        },
+        "ache": {
+            "zh": "$vi.$ 痛；疼痛"
+        },
+        "achieve": {
+            "zh": "$vt.$ 达到；取得"
+        },
+        "achievable": {
+            "zh": "$a.$ 可达到的；可获得的",
+            "so": "词根 $\\text{achieve}$（达到；取得）+$\\text{able}$（能够）"
+        },
+        "across": {
+            "zh": "$prep.$ 横过；穿过；$ad.$ 横过；在对面地",
+            "so": "$\\text{a}$+$\\text{cross}（交叉；穿越）$"
+        },
+        "act": {
+            "zh": "$n.$ 法令；条例；$v.$（戏）表演；行动"
+        }
+    },
+    "arr": [
+        {"name": "中考单词", "arr": [
+            {"name": "A", "arr": [
+                {
+                    "ac": ["ability"],
+                    "wr": ["able", "activity", "disability"]
+                },
+                {
+                    "ac": ["able"],
+                    "wr": ["activity", "table", "enable"]
+                },
+                {
+                    "ac": ["about"],
+                    "wr": ["above", "adopt", "adapt"]
+                },
+                {
+                    "ac": ["abroad"],
+                    "wr": ["aboard", "broad", "board"]
+                },
+                {
+                    "ac": ["absent"],
+                    "wr": ["accent", "accept", "ascent"]
+                },
+                {
+                    "ac": ["accent"],
+                    "wr": ["absent", "accept", "ascent"]
+                },
+                {
+                    "ac": ["accept"],
+                    "wr": ["accent", "absent", "ascent"]
+                },
+                {
+                    "ac": ["accident"],
+                    "wr": ["accent", "ascent", "accept"]
+                },
+                {
+                    "ac": ["ache"],
+                    "wr": ["ate", "act", "axe"]
+                },
+                {
+                    "ac": ["achieve"],
+                    "wr": ["ache", "act", "accept"]
+                },
+                {
+                    "ac": ["across"],
+                    "wr": ["cross", "address", "cost"]
+                },
+                {
+                    "ac": ["act"],
+                    "wr": ["art", "at", "cost"]
+                }
+            ]}
+        ]},
+        {"name": "牛津词典（暂无数据）", "arr": []} 
+    ]
+}
