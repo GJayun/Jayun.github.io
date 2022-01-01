@@ -175,11 +175,11 @@
                 var len = ques.length - 1;
                 $problem = $(md.render(`$$\\text{${ques[len].ac[0]}}$$`)).appendTo($problemboard);
 
-                $wanswer = [], $aanswer = $(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${ques[len].ac[0]}</button>`);
+                $wanswer = [], $aanswer = $(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].ac[0]].zh)}</button>`);
                 let index = Math.floor(Math.random() * 4);
                 for (var i = 0; i < ques[len].wr.length; i++) {
                     if (index == i) $aanswer.appendTo($pboard);
-                    $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${ques[len].wr[i]}</button>`).appendTo($pboard));
+                    $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].wr[i]].zh)}</button>`).appendTo($pboard));
                 }
                 if (index == 3) $aanswer.appendTo($pboard);
             }
