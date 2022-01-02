@@ -99,7 +99,7 @@
 
         var output = document.getElementById('article');
         var result;
-        $.get("/English/p.json",function(data){
+        $.get("/English/p.json", function(data){
             const $ul = $board.children("ul").css("list-style-type", "none");
             const $menu = $(`<div id="menu"></div>`).appendTo($ul);
             $("<br>").appendTo($ul);
@@ -182,6 +182,10 @@
                     $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].wr[i]].zh)}</button>`).appendTo($pboard));
                 }
                 if (index == 3) $aanswer.appendTo($pboard);
+                $aanswer.click(() => {
+                    ques.length--;
+                    startproblem();
+                });
             }
             
             $st.click(() => {
@@ -204,11 +208,13 @@
                 ques = randArr(ques);
 
                 if (!ques.length) {
-                    Swal.fire(
-                        '很抱歉',
-                        '请先选择题目范围！',
-                        'error'
-                      )
+                    Swal.fire({
+                        type: 'error',
+                        title: '很抱歉',
+                        text: '请先选择范围！',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     // alert("请先选择范围！")
                 } else {
                     startproblem();
