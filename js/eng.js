@@ -182,9 +182,37 @@
                     $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].wr[i]].zh)}</button>`).appendTo($pboard));
                 }
                 if (index == 3) $aanswer.appendTo($pboard);
-                $aanswer.click(() => {
+
+                function solution () {
+                    let $sol;
+                    if (data.word[ques[len].ac[0]].so)
+                        $sol = $problemboard.after($(`
+                            <div>${md.render(data.word[ques[len].ac[0]].so)}</div>
+                        `));
                     ques.length--;
-                    startproblem();
+                }
+
+                for (var i = 0; i < ques[len].wr.length; i++) {
+                    $wanswer[i].click(() => {
+                        console.log(1);
+                        Swal.fire({
+                            type: 'error',
+                            title: '答错了！',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    })
+                }
+
+                $aanswer.click(() => {
+                    Swal.fire({
+                        type: 'success',
+                        title: '答对了！',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    solution();
+                    // startproblem();
                 });
             }
             
