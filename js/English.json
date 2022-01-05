@@ -1,12 +1,12 @@
 {"name": "English", 
     "word": {
         "ability": {
-            "ch": "$n.$ 能力；才能",
-            "so": "$\\text{able}$（能够）+$\\text{ty}（名词后缀）$"
+            "zh": "$n.$ 能力；才能",
+            "so": "$\\text{able}$（能够）+$\\text{ty}$（名词后缀）"
         },
         "able": {
             "zh": "$a.$ 能够；有能力的",
-            "so": "比较级：$\\text{abler}，最高级：$\\text{ablest}"
+            "so": "比较级：$\\text{abler}$，最高级：$\\text{ablest}$"
         },
         "about": {
             "zh": "$ad.$ 大约；到处；四处；$prep.$ 关于；在各处；四处；$a.$ 在附近的"
@@ -41,14 +41,14 @@
         },
         "across": {
             "zh": "$prep.$ 横过；穿过；$ad.$ 横过；在对面地",
-            "so": "$\\text{a}$+$\\text{cross}（交叉；穿越）$"
+            "so": "$\\text{a}$+$\\text{cross}$（交叉；穿越）"
         },
         "act": {
             "zh": "$n.$ 法令；条例；$v.$（戏）表演；行动"
         },
         "action": {
             "zh": "$n.$ 行动",
-            "so": "词根 $\\text{act}$（行动）+ $\\text{tion}（名词后缀）$"
+            "so": "词根 $\\text{act}$（行动）+ $\\text{tion}$（名词后缀）"
         }
     },
     "arr": [

@@ -5,7 +5,7 @@
     
     md.use(mk);
 
-    $().ready(function() {
+    $().ready(function BeginProblem() {
         $(`<style>
             .problem-settings {
                 cursor: pointer;
@@ -19,6 +19,7 @@
                 font-size: 12px;
                 position: relative;
                 top: -2px;
+                margin: auto 4px;
             }
             .problem-settings.selected {
                 background-color: cornflowerblue;
@@ -101,7 +102,7 @@
         var result;
         $.get(`/js/${window._feInjection.subject}.json`, function(data){
             const $ul = $board.children("ul").css("list-style-type", "none");
-            const $menu = $(`<div id="menu"></div>`).appendTo($ul);
+            const $menu = $(`<div id="menu" style="text-align: center;"></div>`).appendTo($ul);
             $("<br>").appendTo($ul);
             let $menuarr = [], $entries = [], chdata = [];
 
@@ -110,7 +111,6 @@
                     $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul));
                 $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul).hide());
                 $entries.push($(`<div class="problem-settings am-unselectable problem-entry">${data.arr[i].name}</div>`).appendTo($menu));
-                $entries[i].after($(`<span class="am-unselectable">&nbsp;&nbsp;</span>`));
                 if (!localStorage[window._feInjection.subject]) {
                     let tmp = [];
                     for (var j = 0; j < data.arr[i].arr.length; j++) {
@@ -169,12 +169,58 @@
                     $pboard.empty();
                     $board.remove();
 
+                    if (ques.length == 0) {
+                        $pboard.remove();
+                        Swal.fire({
+                            title: '恭喜！',
+                            text: '您已做完所有题目！',
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            localStorage.removeItem("Now");
+                            BeginProblem();
+                        })
+                        return;
+                    }
+
+                    localStorage.Now = `{"subject": "${window._feInjection.subject}", "course": "${window._feInjection.course}", "ques": ${JSON.stringify(ques)}}`;
+
                     let wflag = 0;
 
                     $problemboard = $(`
                         <p style="font-size: 2em;"></p>
                     `).appendTo($pboard);
+
+                    $cancel = $(`<p style="float: right; -webkit-user-select: none; user-select: none; cursor: pointer; color: #7a7a7a;"><i class="fa fa-times" style="margin-right: 3px"></i>取消答题</p>`).prependTo($pboard);
                     
+                    $cancel.click(() => {
+                        Swal.fire({
+                            title: '您确定吗',
+                            text: "你将重新做题!",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '是',
+                            cancelButtonText: '否'
+                        }).then((result) => {
+                            if (result.value) {
+                                localStorage.removeItem("Now");
+                                $pboard.remove();
+                                BeginProblem();
+                                Swal.fire({
+                                    type: 'success',
+                                    title: '成功！',
+                                    text: '您已成功取消做题',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+                        return;
+                    });
+
                     var len = ques.length - 1;
                     $problem = $(md.render(`$$\\text{${ques[len].ac[0]}}$$`)).appendTo($problemboard);
 
@@ -182,7 +228,9 @@
                     let index = Math.floor(Math.random() * 4);
                     for (var i = 0; i < ques[len].wr.length; i++) {
                         if (index == i) $aanswer.appendTo($pboard);
-                        $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].wr[i]].zh)}</button>`).appendTo($pboard));
+                        if (data.word[ques[len].wr[i]]) {
+                            $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].wr[i]].zh)}</button>`).appendTo($pboard));
+                        }
                     }
                     if (index == 3) $aanswer.appendTo($pboard);
 
@@ -203,7 +251,7 @@
                         })
                     }
 
-                    for (var i = 0; i < ques[len].wr.length; i++) {
+                    for (var i = 0; i < $wanswer.length; i++) {
                         $wanswer[i].click(() => {
                             if (wflag == 0) {
                                 wflag = 1;
@@ -234,7 +282,149 @@
                 
                 if (localStorage.Now) {
                     let dat = JSON.parse(localStorage.Now);
+                    if (dat.course == "Cognition") {
+                        ques = dat.ques;
+                        startproblem();
+                    } else {
+                        $pboard.empty();
+                        $(`
+                            <p>您现在正在做题！</p>
+                            <a class="btn" href="/${dat.subject}/${dat.course}"></a>
+                        `).appendTo($pboard);
+                    }
+                }
+
+                $st.click(() => {
+                    for (var i = 0; i < data.arr.length; i++) {
+                        for (var j = 0; j < chdata[i].length; j++)
+                            for (var k = 0; k < data.arr[i].arr[j].arr.length; k++)
+                                if (chdata[i][j]) ques.push(data.arr[i].arr[j].arr[k]);
+                    }
+
+                    function randArr(arr) {
+                        for (var i = 0; i < arr.length; i++) {
+                            var iRand = parseInt(arr.length * Math.random());
+                            var temp = arr[i];
+                            arr[i] = arr[iRand];
+                            arr[iRand] = temp;
+                        }
+                        return arr;
+                    }
+
+                    ques = randArr(ques);
+
+                    if (!ques.length) {
+                        Swal.fire({
+                            type: 'error',
+                            title: '很抱歉',
+                            text: '请先选择范围！',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                        // alert("请先选择范围！")
+                    } else {
+                        startproblem();
+                    }
+                })
+            }
+
+            function Rec() {
+                var ques = [];
+
+                function startproblem () {
+                    $pboard.empty();
+                    $board.remove();
+
+                    if (ques.length == 0) {
+                        $pboard.remove();
+                        Swal.fire({
+                            title: '恭喜！',
+                            text: '您已做完所有题目！',
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            localStorage.removeItem("Now");
+                            BeginProblem();
+                        })
+                        return;
+                    }
+
+                    localStorage.Now = `{"subject": "${window._feInjection.subject}", "course": "${window._feInjection.course}", "ques": ${JSON.stringify(ques)}}`;
+
+                    let wflag = 0;
+
+                    $problemboard = $(`
+                        <p style="font-size: 2em; text-align: center;"></p>
+                    `).appendTo($pboard);
+
+                    $cancel = $(`<p style="float: right; -webkit-user-select: none; user-select: none; cursor: pointer; color: #7a7a7a;"><i class="fa fa-times" style="margin-right: 3px"></i>取消答题</p>`).prependTo($pboard);
                     
+                    $cancel.click(() => {
+                        Swal.fire({
+                            title: '您确定吗',
+                            text: "你将重新做题!",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '是',
+                            cancelButtonText: '否'
+                        }).then((result) => {
+                            if (result.value) {
+                                localStorage.removeItem("Now");
+                                $pboard.remove();
+                                BeginProblem();
+                                Swal.fire({
+                                    type: 'success',
+                                    title: '成功！',
+                                    text: '您已成功取消做题',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+                        return;
+                    });
+
+                    var len = ques.length - 1;
+                    $problem = $(md.render(data.word[ques[len].ac[0]].zh)).appendTo($problemboard);
+
+                    
+                    if (index == 3) $aanswer.appendTo($pboard);
+
+                    function solution () {
+                        let $sol;
+                        if (data.word[ques[len].ac[0]].so)
+                            $sol = $problemboard.after($(`
+                                <div>${md.render(data.word[ques[len].ac[0]].so)}</div>
+                            `));
+                        for (var i = 0; i < ques[len].wr.length; i++) {
+                            $(`<div style="float: right; color: #a00;">${md.render(`$\\text{${ques[len].wr[i]}}$`)}</div>`).prependTo($wanswer[i]);
+                        }
+                        $nxtboard = $(`<div style="text-align: center;"></div>`).appendTo($pboard);
+                        $nxt = $(`<button class="btn orange" style="margin: 3px;">下一题</button>`).appendTo($nxtboard);
+                        $nxt.click(() => {
+                            ques.length--;
+                            startproblem();
+                        })
+                    }
+
+                    
+                }
+                
+                if (localStorage.Now) {
+                    let dat = JSON.parse(localStorage.Now);
+                    if (dat.course == "Recitation") {
+                        ques = dat.ques;
+                        startproblem();
+                    } else {
+                        $pboard.empty();
+                        $(`
+                            <p>您现在正在做题！</p>
+                            <a class="btn" href="/${dat.subject}/${dat.course}"></a>
+                        `).appendTo($pboard);
+                    }
                 }
 
                 $st.click(() => {
@@ -272,6 +462,7 @@
             }
 
             if (window._feInjection.course == "Cognition") Cog();
+            if (window._feInjection.course == "Recitation") Rec();
 
             // result = md.render(data);
             // output.innerHTML = result;
