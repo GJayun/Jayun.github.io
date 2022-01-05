@@ -85,7 +85,7 @@
         
         const $pboard = $(`
             <div id="article">
-                <p>请在选项中选择单词范围。如果已选择合适的范围，请按“开始”按钮。</p>
+                <p>请在选项中选择题目范围。如果已选择合适的范围，请按“开始”按钮。</p>
             </div>
         `).appendTo("#atcboard");       
         
@@ -99,7 +99,7 @@
 
         var output = document.getElementById('article');
         var result;
-        $.get("/English/p.json", function(data){
+        $.get(`/js/${window._feInjection.subject}.json`, function(data){
             const $ul = $board.children("ul").css("list-style-type", "none");
             const $menu = $(`<div id="menu"></div>`).appendTo($ul);
             $("<br>").appendTo($ul);
@@ -111,7 +111,7 @@
                 $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul).hide());
                 $entries.push($(`<div class="problem-settings am-unselectable problem-entry">${data.arr[i].name}</div>`).appendTo($menu));
                 $entries[i].after($(`<span class="am-unselectable">&nbsp;&nbsp;</span>`));
-                if (!localStorage.English) {
+                if (!localStorage[window._feInjection.subject]) {
                     let tmp = [];
                     for (var j = 0; j < data.arr[i].arr.length; j++) {
                         tmp.push(false);
@@ -120,8 +120,8 @@
                 }
             }
 
-            if (localStorage.English) {
-                chdata = JSON.parse(localStorage.English);
+            if (localStorage[window._feInjection.subject]) {
+                chdata = JSON.parse(localStorage[window._feInjection.subject]);
             }
 
             $entries[0].addClass("selected");
@@ -150,7 +150,7 @@
                             $btn[b].hide()
                             $btn[1 - b].show()
                             mlist[index] = !! b
-                            localStorage.setItem("English", JSON.stringify(chdata));
+                            localStorage.setItem(`${window._feInjection.subject}`, JSON.stringify(chdata));
                         })
                         if (mlist[index] == (!! b)) $btn[b].hide()
                     }, 0, 1)
@@ -162,92 +162,116 @@
                 clickitem([$menuarr[i], data.arr[i].arr, chdata[i]]);
             }
 
-            var ques = [];
+            function Cog() {
+                var ques = [];
 
-            function startproblem () {
-                $pboard.empty();
-                $board.remove();
+                function startproblem () {
+                    $pboard.empty();
+                    $board.remove();
 
-                $problemboard = $(`
-                    <p style="font-size: 2em;"></p>
-                `).appendTo($pboard);
+                    let wflag = 0;
+
+                    $problemboard = $(`
+                        <p style="font-size: 2em;"></p>
+                    `).appendTo($pboard);
+                    
+                    var len = ques.length - 1;
+                    $problem = $(md.render(`$$\\text{${ques[len].ac[0]}}$$`)).appendTo($problemboard);
+
+                    $wanswer = [], $aanswer = $(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].ac[0]].zh)}</button>`);
+                    let index = Math.floor(Math.random() * 4);
+                    for (var i = 0; i < ques[len].wr.length; i++) {
+                        if (index == i) $aanswer.appendTo($pboard);
+                        $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].wr[i]].zh)}</button>`).appendTo($pboard));
+                    }
+                    if (index == 3) $aanswer.appendTo($pboard);
+
+                    function solution () {
+                        let $sol;
+                        if (data.word[ques[len].ac[0]].so)
+                            $sol = $problemboard.after($(`
+                                <div>${md.render(data.word[ques[len].ac[0]].so)}</div>
+                            `));
+                        for (var i = 0; i < ques[len].wr.length; i++) {
+                            $(`<div style="float: right; color: #a00;">${md.render(`$\\text{${ques[len].wr[i]}}$`)}</div>`).prependTo($wanswer[i]);
+                        }
+                        $nxtboard = $(`<div style="text-align: center;"></div>`).appendTo($pboard);
+                        $nxt = $(`<button class="btn orange" style="margin: 3px;">下一题</button>`).appendTo($nxtboard);
+                        $nxt.click(() => {
+                            ques.length--;
+                            startproblem();
+                        })
+                    }
+
+                    for (var i = 0; i < ques[len].wr.length; i++) {
+                        $wanswer[i].click(() => {
+                            if (wflag == 0) {
+                                wflag = 1;
+                                Swal.fire({
+                                    type: 'error',
+                                    title: '答错了！',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                solution(); 
+                            }
+                        })
+                    }
+
+                    $aanswer.click(() => {
+                        if (wflag == 0) {
+                            wflag = 2;
+                            Swal.fire({
+                                type: 'success',
+                                title: '答对了！',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                            solution(); 
+                        }
+                    });
+                }
                 
-                var len = ques.length - 1;
-                $problem = $(md.render(`$$\\text{${ques[len].ac[0]}}$$`)).appendTo($problemboard);
-
-                $wanswer = [], $aanswer = $(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].ac[0]].zh)}</button>`);
-                let index = Math.floor(Math.random() * 4);
-                for (var i = 0; i < ques[len].wr.length; i++) {
-                    if (index == i) $aanswer.appendTo($pboard);
-                    $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].wr[i]].zh)}</button>`).appendTo($pboard));
-                }
-                if (index == 3) $aanswer.appendTo($pboard);
-
-                function solution () {
-                    let $sol;
-                    if (data.word[ques[len].ac[0]].so)
-                        $sol = $problemboard.after($(`
-                            <div>${md.render(data.word[ques[len].ac[0]].so)}</div>
-                        `));
-                    ques.length--;
+                if (localStorage.Now) {
+                    let dat = JSON.parse(localStorage.Now);
+                    
                 }
 
-                for (var i = 0; i < ques[len].wr.length; i++) {
-                    $wanswer[i].click(() => {
-                        console.log(1);
+                $st.click(() => {
+                    for (var i = 0; i < data.arr.length; i++) {
+                        for (var j = 0; j < chdata[i].length; j++)
+                            for (var k = 0; k < data.arr[i].arr[j].arr.length; k++)
+                                if (chdata[i][j]) ques.push(data.arr[i].arr[j].arr[k]);
+                    }
+
+                    function randArr(arr) {
+                        for (var i = 0; i < arr.length; i++) {
+                            var iRand = parseInt(arr.length * Math.random());
+                            var temp = arr[i];
+                            arr[i] = arr[iRand];
+                            arr[iRand] = temp;
+                        }
+                        return arr;
+                    }
+
+                    ques = randArr(ques);
+
+                    if (!ques.length) {
                         Swal.fire({
                             type: 'error',
-                            title: '答错了！',
+                            title: '很抱歉',
+                            text: '请先选择范围！',
                             showConfirmButton: false,
                             timer: 1500
                         })
-                    })
-                }
-
-                $aanswer.click(() => {
-                    Swal.fire({
-                        type: 'success',
-                        title: '答对了！',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    solution();
-                    // startproblem();
-                });
-            }
-            
-            $st.click(() => {
-                for (var i = 0; i < data.arr.length; i++) {
-                    for (var j = 0; j < chdata[i].length; j++)
-                        for (var k = 0; k < data.arr[i].arr[j].arr.length; k++)
-                            if (chdata[i][j]) ques.push(data.arr[i].arr[j].arr[k]);
-                }
-
-                function randArr(arr) {
-                    for (var i = 0; i < arr.length; i++) {
-                        var iRand = parseInt(arr.length * Math.random());
-                        var temp = arr[i];
-                        arr[i] = arr[iRand];
-                        arr[iRand] = temp;
+                        // alert("请先选择范围！")
+                    } else {
+                        startproblem();
                     }
-                    return arr;
-                }
+                })
+            }
 
-                ques = randArr(ques);
-
-                if (!ques.length) {
-                    Swal.fire({
-                        type: 'error',
-                        title: '很抱歉',
-                        text: '请先选择范围！',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    // alert("请先选择范围！")
-                } else {
-                    startproblem();
-                }
-            })
+            if (window._feInjection.course == "Cognition") Cog();
 
             // result = md.render(data);
             // output.innerHTML = result;

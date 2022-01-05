@@ -128,7 +128,7 @@ body{
     -webkit-tap-highlight-color: transparent
 }
 
-.btn > p {
+.btn > p, .btn > div > p {
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
 }
