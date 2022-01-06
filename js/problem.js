@@ -169,6 +169,8 @@
                     $pboard.empty();
                     $board.remove();
 
+                    console.log(ques);
+
                     if (ques.length == 0) {
                         $pboard.remove();
                         Swal.fire({
@@ -237,16 +239,28 @@
                     function solution () {
                         let $sol;
                         if (data.word[ques[len].ac[0]].so)
-                            $sol = $problemboard.after($(`
-                                <div>${md.render(data.word[ques[len].ac[0]].so)}</div>
-                            `));
+                        $sol = $problemboard.after($(`
+                        <p><strong>解析：</strong></p><div>${md.render(data.word[ques[len].ac[0]].so)}</div>
+                        `));
                         for (var i = 0; i < ques[len].wr.length; i++) {
                             $(`<div style="float: right; color: #a00;">${md.render(`$\\text{${ques[len].wr[i]}}$`)}</div>`).prependTo($wanswer[i]);
-                        }
+                        }    
+
+                        $problemboard.after(md.render(`**答案：**<div style="color: #22ab00;">${data.word[ques[len].ac[0]].zh}</div>`));
+                        
+                        if (wflag == 1) {
+                            let tmp = ques;
+                            for (var i = 1.0; ques.length - Math.floor(i) - 1 >= 0; i *= 1.65) {
+                                if (ques[ques.length - Math.floor(i) - 1] == ques[ques.length-1]) continue;
+                                tmp.splice(ques.length - Math.floor(i) - 1, 0, ques[ques.length-1]);
+                            }
+                            ques = tmp;
+                        } 
+                        ques.length--;
+
                         $nxtboard = $(`<div style="text-align: center;"></div>`).appendTo($pboard);
                         $nxt = $(`<button class="btn orange" style="margin: 3px;">下一题</button>`).appendTo($nxtboard);
                         $nxt.click(() => {
-                            ques.length--;
                             startproblem();
                         })
                     }
@@ -286,10 +300,11 @@
                         ques = dat.ques;
                         startproblem();
                     } else {
+                        $board.remove();
                         $pboard.empty();
                         $(`
                             <p>您现在正在做题！</p>
-                            <a class="btn" href="/${dat.subject}/${dat.course}"></a>
+                            <a class="btn" href="/${dat.subject}/${dat.course}">返回至题目页面</a>
                         `).appendTo($pboard);
                     }
                 }
@@ -390,9 +405,6 @@
                     var len = ques.length - 1;
                     $problem = $(md.render(data.word[ques[len].ac[0]].zh)).appendTo($problemboard);
 
-                    
-                    if (index == 3) $aanswer.appendTo($pboard);
-
                     function solution () {
                         let $sol;
                         if (data.word[ques[len].ac[0]].so)
@@ -419,10 +431,11 @@
                         ques = dat.ques;
                         startproblem();
                     } else {
+                        $board.remove();
                         $pboard.empty();
                         $(`
                             <p>您现在正在做题！</p>
-                            <a class="btn" href="/${dat.subject}/${dat.course}"></a>
+                            <a class="btn" href="/${dat.subject}/${dat.course}">返回至题目页面</a>
                         `).appendTo($pboard);
                     }
                 }
