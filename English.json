@@ -1,0 +1,648 @@
+{"name": "English", 
+    "word": {
+        "ability": {
+            "zh": "$n.$ 能力；才能",
+            "so": "$\\text{able}$（能够）+$\\text{ty}$（名词后缀）"
+        },
+        "able": {
+            "zh": "$a.$ 能够；有能力的",
+            "so": "比较级：$\\text{abler}$，最高级：$\\text{ablest}$"
+        },
+        "about": {
+            "zh": "$ad.$ 大约；到处；四处；$prep.$ 关于；在各处；四处；$a.$ 在附近的"
+        },
+        "above": {
+            "zh": "$prep.$ 在 …… 上面；$a.$  上面的；$ad.$  在 …… 之上"
+        },
+        "abroad": {
+            "zh": "$ad.$ 到国外；$a.$ 往国外的；$n.$ 异国"
+        },
+        "absent": {
+            "zh": "$a.$ 缺席的；不在；$vt.$ 缺席"
+        },
+        "accent": {
+            "zh": "$n.$ 口音；音调；$vt.$ 着重；强调"
+        },
+        "accept": {
+            "zh": "$vt.$ 接受"
+        },
+        "activity": {
+            "zh": "$n.$ 活动；活跃"
+        },
+        "ascent": {
+            "zh": "$n.$ 上升；升高；进步"
+        },
+        "accident": {
+            "zh": "$n.$ 事故；意外"
+        },
+        "ache": {
+            "zh": "$vi.$ 痛；疼痛"
+        },
+        "achieve": {
+            "zh": "$vt.$ 达到；取得"
+        },
+        "achievable": {
+            "zh": "$a.$ 可达到的；可获得的",
+            "so": "词根 $\\text{achieve}$（达到；取得）+$\\text{able}$（能够）"
+        },
+        "across": {
+            "zh": "$prep.$ 横过；穿过；$ad.$ 横过；在对面地",
+            "so": "$\\text{a}$+$\\text{cross}$（交叉；穿越）"
+        },
+        "act": {
+            "zh": "$n.$ 法令；条例；$v.$（戏）表演；行动"
+        },
+        "action": {
+            "zh": "$n.$ 行动",
+            "so": "词根 $\\text{act}$（行动）+ $\\text{tion}$（名词后缀）"
+        },
+        "active": {
+            "zh": "$a.$  积极的，主动的"
+        },
+        "add": {
+            "zh": "$vt.$  添加，增加"
+        },
+        "address": {
+            "zh": "$n.$  地址"
+        },
+        "advantage": {
+            "zh": "$n.$  优点；  好处"
+        },
+        "advertisement": {
+            "zh": "$n.$  广告"
+        },
+        "advice": {
+            "zh": "$n.$  忠告，劝告， 建议"
+        },
+        "advise": {
+            "zh": "$vt.$  忠告，劝告，建议"
+        },
+        "afford": {
+            "zh": "$vt.$  负担得起（ …… 的 费用）；抽得出（时间）；提供"
+        },
+        "afraid": {
+            "zh": "$a.$  害怕的；担心"
+        },
+        "after": {
+            "zh": "$ad.$  在后；后来 $prep.$ 在 …… 之后；在 …… 后面 $conj.$  在 …… 以后"
+        },
+        "afternoon": {
+            "zh": "$n.$  下午，午后"
+        },
+        "again": {
+            "zh": "$ad.$  再一次； 再， 又"
+        },
+        "adopt": {
+            "zh": "$v.$  收养；领养；采用（某方法）"
+        },
+        "adapt": {
+            "zh": "$v.$ 适应（新情况）；改变；改写"
+        },
+        "against": {
+            "zh": "$prep.$  对着，反对"
+        },
+        "age": {
+            "zh": "$n.$  年龄；时代"
+        },
+        "ago": {
+            "zh": "$ad.$  以前"
+        },
+        "agree": {
+            "zh": "$v.$  同意； 应允"
+        },
+        "agreement": {
+            "zh": "$n.$  同意，一致；协 定，协议"
+        },
+        "air": {
+            "zh": "$n.$  空气；大气"
+        },
+        "airplane": {
+            "zh": "$n.$    （美） 飞机"
+        },
+        "airport": {
+            "zh": "$n.$  航空站， 飞机场"
+        },
+        "alive": {
+            "zh": "$a.$  活着的，存在的"
+        },
+        "all": {
+            "zh": "$ad.$  全部地$a.$  全（部）；所有的；总； 整$pron.$  全部； 全体人员"
+        },
+        "allow": {
+            "zh": "$vt.$  允许，准许"
+        },
+        "almost": {
+            "zh": "$ad.$  几乎， 差不多"
+        },
+        "alone": {
+            "zh": "$a.$  单独的， 孤独的"
+        },
+        "along": {
+            "zh": "$ad.$  向前；和 …… 一 起；一同$prep.$  沿着； 顺着"
+        },
+        "aloud": {
+            "zh": "$ad.$  大声地"
+        },
+        "already": {
+            "zh": "$ad.$  已经"
+        },
+        "also": {
+            "zh": "$ad.$  也"
+        },
+        "although": {
+            "zh": "$conj.$  虽然， 尽管"
+        },
+        "always": {
+            "zh": "$ad.$  总是； 一直；永远"
+        },
+        "America": {
+            "zh": "$n.$  美国； 美洲"
+        },
+        "American": {
+            "zh": "$a.$  美国的；美国人的 $n.$  美国人"
+        },
+        "among": {
+            "zh": "$prep.$  在 …… 中间；在 （三个以上）之间"
+        },
+        "amuse": {
+            "zh": "$vt.$   （使人） 快乐，逗乐"
+        },
+        "ancient": {
+            "zh": "$a.$  古代的，古老的"
+        },
+        "and": {
+            "zh": "$conj.$  和； 又； 而"
+        },
+        "angry": {
+            "zh": "$a.$  生气的， 愤怒的"
+        },
+        "animal": {
+            "zh": "$n.$  动物"
+        },
+        "another": {
+            "zh": "$a.$  再一；另一； 别的； 不同的 $pron.$  另一个"
+        },
+        "answer": {
+            "zh": "$n.$  回答， 答复；回信； 答案 $v.$  回答，答复；回信；（作 出）答案"
+        },
+        "ant": {
+            "zh": "$n.$  蚂蚁"
+        },
+        "any": {
+            "zh": "$pron.$   （无论） 哪一个；哪 些 任何的；（用于疑问句、否 定句） 一些；什么"
+        },
+        "anybody": {
+            "zh": "$pron.$  任何人，无论谁"
+        },
+        "anyone": {
+            "zh": "$pron.$  任何人， 无论谁"
+        },
+        "anything": {
+            "zh": "$pron.$  什么事（物）； 任何事（物）"
+        },
+        "anyway": {
+            "zh": "$ad.$  不管怎样"
+        },
+        "anywhere": {
+            "zh": "$ad.$  任何地方"
+        },
+        "appear": {
+            "zh": "$vi.$  出现"
+        },
+        "apple": {
+            "zh": "$n.$  苹果"
+        },
+        "April": {
+            "zh": "$n.$ 4  月"
+        },
+        "area": {
+            "zh": "$n.$  面积；地域，地方，区 域；范围， 领域"
+        },
+        "arm": {
+            "zh": "$n.$  臂，支架"
+        },
+        "army": {
+            "zh": "$n.$  军队"
+        },
+        "around": {
+            "zh": "$ad.$  在周围；在附近 $prep.$  在 …… 周围； 大约"
+        },
+        "arrive": {
+            "zh": "$vi.$  到达；达到"
+        },
+        "article": {
+            "zh": "$n.$  文章；东西；冠词"
+        },
+        "art": {
+            "zh": "$n.$  艺术，美术；技艺"
+        },
+        "as": {
+            "zh": "$ad.$ & $conj.$ 像 …… 一 样；如同；因为 $prep.$  作为， 当做"
+        },
+        "Asia": {
+            "zh": "$n.$  亚洲"
+        },
+        "Asian": {
+            "zh": "$a.$  亚洲的，亚洲人的 $n.$ 亚洲人"
+        },
+        "ask": {
+            "zh": "$v.$  问，询问；请求，要求； 邀请"
+        },
+        "asleep": {
+            "zh": "$a.$  睡着的，熟睡"
+        },
+        "at": {
+            "zh": "$prep.$  在（几点钟）；在（某 处）"
+        },
+        "Atlantic": {
+            "zh": "$a.$  大西洋的"
+        },
+        "attention": {
+            "zh": "$n.$  注意， 关心"
+        },
+        "August": {
+            "zh": "$n.$ 8  月"
+        },
+        "aunt": {
+            "zh": "$n.$  伯母；舅母； 婶； 姑； 姨"
+        },
+        "Australia": {
+            "zh": "$n.$  澳洲；澳大利亚"
+        },
+        "Australian": {
+            "zh": "$a.$  澳洲的，澳大利 亚人的 $n.$  澳大利亚人"
+        },
+        "autumn": {
+            "zh": "$n.$  秋天，秋季"
+        },
+        "avoid": {
+            "zh": "$v.$  避免，躲开，逃避"
+        },
+        "awake": {
+            "zh": "$v.$ 唤醒 醒着的",
+            "so": "\\text{awoke, awoken}"
+        },
+        "away": {
+            "zh": "$ad.$  离开；远离"
+        },
+        "axe": {
+            "zh": "$n.$ 斧子；斧"
+        },
+        "baby": {
+            "zh": "$n.$  婴儿"
+        },
+        "back": {
+            "zh": "$ad.$  回（原处）；向后 $a.$  后 面的$n.$  背后， 后部；背"
+        },
+        "background": {
+            "zh": "$n.$  背景"
+        },
+        "bad": {
+            "zh": "$a.$  坏的； 有害的， 不利 的；严重的",
+            "so": "  比较级 worse,  最高级 worst"
+        },
+        "bag": {
+            "zh": "$n.$  书包；提包； 袋子"
+        },
+        "ball": {
+            "zh": "$n.$  球 舞会"
+        },
+        "balloon": {
+            "zh": "$n.$  气球"
+        },
+        "bamboo": {
+            "zh": "$n.$  竹"
+        },
+        "banana": {
+            "zh": "$n.$  香蕉"
+        },
+        "bank": {
+            "zh": "$n.$   （河、海、湖的）岸，堤 银行"
+        },
+        "base": {
+            "zh": "$n.$  基础 $vt.$ 以 …… 为据点  $a.$ 卑鄙的"
+        },
+        "baseball": {
+            "zh": "$n.$  棒球"
+        },
+        "basic": {
+            "zh": "$a.$  基本的"
+        },
+        "basket": {
+            "zh": "$n.$  篮子"
+        },
+        "basketball": {
+            "zh": "$n.$  篮球"
+        },
+        "bathroom": {
+            "zh": "$n.$  浴室，盥洗室"
+        },
+        "be": {
+            "zh": "$v.$  是（原形），其人称和时 态形式有 $am,  $is,  $are,  $was, $were, $being, $been  ；成为"
+        },
+        "beach": {
+            "zh": "$n.$  海滨， 海滩"
+        },
+        "bear": {
+            "zh": "$n.$  熊  $v.$ 忍受"
+        },
+        "beat": {
+            "zh": "$v.$  敲打；跳 动；打赢 $n.$    （音乐）节拍",
+            "so": "\\text{beat, beaten}"
+        },
+        "beautiful": {
+            "zh": "$a.$  美的，美丽的，美 观的"
+        },
+        "because": {
+            "zh": "$conj.$  因为"
+        },
+        "become": {
+            "zh": "$v.$ 变得；成为",
+            "so": "\\text{became, become}"
+        },
+        "bed": {
+            "zh": "$n.$  床"
+        },
+        "bedroom": {
+            "zh": "$n.$  寝室， 卧室"
+        },
+        "bee": {
+            "zh": "$n.$.$  蜜蜂"
+        },
+        "beef": {
+            "zh": "$n.$  牛肉"
+        },
+        "before": {
+            "zh": "$prep.$  在 …… 以前； 在 …… 前面 $ad.$  以前 $conj.$ 在 …… 之前"
+        },
+        "begin": {
+            "zh": "$v.$   开始，着手",
+            "so": "\\text{began,begun}"
+        },
+        "behave": {
+            "zh": "$v.$  表现"
+        },
+        "behaviour": {
+            "zh": "$n.$  行为， 举止"
+        },
+        "behind": {
+            "zh": "$prep.$  (  表 示 位 置 ) 在 …… 后面 $ad.$  在后面；向 后"
+        },
+        "believe": {
+            "zh": "$v.$  相信， 认为"
+        },
+        "bell": {
+            "zh": "$n.$  钟，铃；钟 (  铃 )  声； 钟形物"
+        },
+        "below": {
+            "zh": "$prep.$  在 …… 下面"
+        },
+        "belt": {
+            "zh": "$n.$    （皮）带"
+        },
+        "beside": {
+            "zh": "$prep.$  在 …… 旁边；靠 近"
+        },
+        "besides": {
+            "zh": "$prep.$  除 …… 以外 （还有）  $ad.$  还有， 此外"
+        },
+        "between": {
+            "zh": "$prep.$  在（两者）之间； 在 …… 中间"
+        },
+        "beyond": {
+            "zh": "$prep.$  (  表示位置 ) 在 …… 的那边"
+        },
+        "big": {
+            "zh": "$a.$  大的"
+        },
+        "bike": {
+            "zh": "$n.$  自行车"
+        },
+        "bicycle": {
+            "zh": "$n.$  自行车"
+        },
+        "bill": {
+            "zh": "$n.$  账单；法案，议案；（美） 钞票， 纸币"
+        },
+        "bird": {
+            "zh": "$n.$  鸟"
+        },
+        "birth": {
+            "zh": "$n.$  出生；  诞生"
+        },
+        "birthday": {
+            "zh": "$n.$  生日"
+        },
+        "biscuit": {
+            "zh": "$n.$  饼干"
+        },
+        "bit": {
+            "zh": "$n.$  一点，一些， 少量的"
+        },
+        "bitter": {
+            "zh": "$a.$  有苦味的；痛苦的， 难过的；严酷的"
+        },
+        "black": {
+            "zh": "$n.$  黑色 $a.$  黑色的"
+        },
+        "blackboard": {
+            "zh": "$n.$  黑板"
+        },
+        "blind": {
+            "zh": "$a.$  瞎的"
+        },
+        "blood": {
+            "zh": "$n.$  血， 血液"
+        },
+        "blow": {
+            "zh": "$n.$  击；打击"
+        },
+        "blue": {
+            "zh": "$n.$  蓝色 $a.$  蓝色的 悲伤 的；沮丧的"
+        },
+        "board": {
+            "zh": "$n.$  木板； 布告牌； 委员 会；（政府的） 部 $v.$  上（船、 火车、飞机）"
+        },
+        "boat": {
+            "zh": "$n.$  小船，小舟"
+        },
+        "body": {
+            "zh": "$n.$  身体"
+        },
+        "book": {
+            "zh": "$n.$  书；本子 $v.$  预定，定 （房间、车票等）"
+        },
+        "boring": {
+            "zh": "$a.$  乏味的， 无聊的"
+        },
+        "born": {
+            "zh": "$a.$  出生"
+        },
+        "borrow": {
+            "zh": "$v.$   （向别人） 借用；借"
+        },
+        "boss": {
+            "zh": "$n.$  领班；老板"
+        },
+        "both": {
+            "zh": "$a.$  两； 双 $pron.$  两者；双 方"
+        },
+        "bottle": {
+            "zh": "$n.$  瓶子"
+        },
+        "bottom": {
+            "zh": "$n.$  底部； 底"
+        },
+        "bowl": {
+            "zh": "$n.$  碗"
+        },
+        "box": {
+            "zh": "$n.$  盒子，箱子"
+        },
+        "boy": {
+            "zh": "$n.$  男孩"
+        },
+        "brain": {
+            "zh": "$n.$  脑（子）"
+        },
+        "brave": {
+            "zh": "$a.$  勇敢的"
+        },
+        "bread": {
+            "zh": "$n.$  面包"
+        },
+        "break": {
+            "zh": "$v.$  打破 （断， 碎）；损坏， 撕开 $n.$  间 隙",
+            "so": "\\text{broke,  broken}"
+        },
+        "breakfast": {
+            "zh": "$n.$  早餐"
+        },
+        "breath": {
+            "zh": "$n.$  气息；呼吸"
+        },
+        "breathe": {
+            "zh": "$vi.$  呼吸"
+        },
+        "bridge": {
+            "zh": "$n.$  桥"
+        },
+        "bright": {
+            "zh": "$a.$  明亮的；聪明的"
+        },
+        "bring": {
+            "zh": "$vt.$  拿 来，带来， 取来",
+            "so": "\\text{brought, brought}"
+        },
+        "brother": {
+            "zh": "$n.$  兄； 弟"
+        },
+        "brown": {
+            "zh": "$n.$  褐色，棕色 $a.$  褐色 的，棕色的"
+        },
+        "brush": {
+            "zh": "$v.$  刷；擦 $n.$  刷子"
+        },
+        "build": {
+            "zh": "$v.$  建筑； 造",
+            "so": "built, built"
+        },
+        "building": {
+            "zh": "$n.$  建筑物； 房屋；大 楼"
+        },
+        "bun": {
+            "zh": "$n.$  馒头；小甜面包"
+        },
+        "burn": {
+            "zh": "$v.$  燃， 烧， 着火；使烧焦；使 晒黑 $n.$  烧伤； 晒伤",
+            "so": "\\text{-ed, -ed} 或 \\text{burnt, burnt}，既有规则也有不规则！"
+        },
+        "bus": {
+            "zh": "$n.$  公共汽车"
+        },
+        "business": {
+            "zh": "$n.$    （本分） 工作，职 业；职责； 生意，交易； 事业"
+        },
+        "busy": {
+            "zh": "$a.$  忙（碌） 的"
+        },
+        "but": {
+            "zh": "$conj.$  但是， 可是$prep.$  除了，除 …… 外"
+        },
+        "butter": {
+            "zh": "$n.$  黄油， 奶油"
+        },
+        "butterfly": {
+            "zh": "$n.$  蝴蝶"
+        },
+        "buy": {
+            "zh": "$vt.$  买",
+            "so": "\\text{bought,bought}"
+        },
+        "by": {
+            "zh": "$prep.$  靠近， 在 …… 旁； 在 …… 时间；不迟于；被； 用；由；乘（车）"
+        },
+        "bye": {
+            "zh": "$int.$  再见"
+        }
+    },
+    "arr": [
+        {"name": "中考单词", "arr": [
+            {"name": "A", "arr": [
+                {
+                    "ac": ["ability"],
+                    "wr": ["able", "activity", "disability"]
+                },
+                {
+                    "ac": ["able"],
+                    "wr": ["activity", "table", "enable"]
+                },
+                {
+                    "ac": ["about"],
+                    "wr": ["above", "adopt", "adapt"]
+                },
+                {
+                    "ac": ["abroad"],
+                    "wr": ["aboard", "broad", "board"]
+                },
+                {
+                    "ac": ["absent"],
+                    "wr": ["accent", "accept", "ascent"]
+                },
+                {
+                    "ac": ["accent"],
+                    "wr": ["absent", "accept", "ascent"]
+                },
+                {
+                    "ac": ["accept"],
+                    "wr": ["accent", "absent", "ascent"]
+                },
+                {
+                    "ac": ["accident"],
+                    "wr": ["accent", "ascent", "accept"]
+                },
+                {
+                    "ac": ["ache"],
+                    "wr": ["art", "act", "axe"]
+                },
+                {
+                    "ac": ["achieve"],
+                    "wr": ["ache", "act", "accept"]
+                },
+                {
+                    "ac": ["across"],
+                    "wr": ["cross", "address", "cost"]
+                },
+                {
+                    "ac": ["act"],
+                    "wr": ["art", "at", "cost"]
+                },
+                {
+                    "ac": ["action"],
+                    "wr": ["art", "act", "at"]
+                }
+            ]}
+        ]},
+        {"name": "牛津词典（暂无数据）", "arr": []} 
+    ]
+}
