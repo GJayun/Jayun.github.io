@@ -1,0 +1,13 @@
+{"name": "Chinese", 
+    "arr": [
+        {"name": "九年级上册", "arr": [
+            {"name": "九年级上册", "arr": [
+                {
+                    "ac": ["ability"],
+                    "wr": ["able", "activity", "disability"]
+                }
+            ]}
+        ]},
+        {"name": "九年级下册", "arr": []} 
+    ]
+}

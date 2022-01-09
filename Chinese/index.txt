@@ -8,4 +8,6 @@
 
 ## 古诗词、古文默写、古文词语注释
 
+<a class="btn blue" href="./Poem" target="_self">开始背诗</a>
+
 **主要功能**：给定题目默写答案。

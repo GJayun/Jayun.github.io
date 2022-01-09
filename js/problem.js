@@ -169,8 +169,6 @@
                     $pboard.empty();
                     $board.remove();
 
-                    console.log(ques);
-
                     if (ques.length == 0) {
                         $pboard.remove();
                         Swal.fire({
