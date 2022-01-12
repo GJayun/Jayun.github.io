@@ -4,25 +4,381 @@
     
     md.use(mk);
 
-    $().ready(function() {
-        $(`
-            <div class="container">
+    $(`
+        <div id="app">
+        </div>
+    `).appendTo("body");
+
+    function load() {
+        if (window._feInjection.course) {
+            function BeginProblem() {
+                $(`<style>
+                    .problem-settings {
+                        cursor: pointer;
+                        position: relative;
+                        display: inline-block;
+                        padding: 1px 5px 1px 5px;
+                        background-color: white;
+                        border: 1px solid #6495ED;
+                        color: cornflowerblue;
+                        border-radius: 3px;
+                        font-size: 12px;
+                        position: relative;
+                        top: -2px;
+                        margin: auto 4px;
+                    }
+                    .problem-settings.selected {
+                        background-color: cornflowerblue;
+                        border: 1px solid #6495ED;
+                        color: white;
+                    }
+                    .window {
+                        position: absolute;
+                        margin-top: 15px;
+                        width: 1100px;
+                        height: 300px;
+                        padding: 5px;
+                        background: white;
+                        color: black;
+                        border-radius: 7px;
+                    }
+        
+                    .am-smallbtn {
+                        cursor: pointer;
+                        position: relative;
+                        display: inline-block;
+                        padding: 1px 5px 1px;
+                        color: white;
+                        border-radius: 3px;
+                        font-size: 12px;
+                        margin-left: 1px;
+                        margin-right: 1px;
+                    }
+        
+                    .am-unselectable {
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -o-user-select: none;
+                        user-select: none;
+                    }
+        
+                    .problem-enabled{
+                        width: 49%;
+                        float: left;
+                    }
+                    .problem-disabled{
+                        width: 49%;
+                        float: right;
+                    }
+        
+                    .small {
+                        font-size: 10px;
+                        color: #7f7f7f;
+                    }
+                    
+                    .inline-up {
+                        display: inline-block;
+                        vertical-align: top;
+                        margin-right: 10px;
+                    }
+        
+                </style>`).appendTo("head");
+                $(`
+                    <div class="container">
+                        <div class="atc-index-content atc-center" id="atcboard" style="padding: 0px !important">
+                        </div>
+                    </div>
+                `).appendTo("#app");
+                
+                const $pboard = $(`
+                    <div id="article">
+                        <p>请在选项中选择题目范围。如果已选择合适的范围，请按“开始”按钮。</p>
+                    </div>
+                `).appendTo("#atcboard");       
+                
+                $st = $(`<button class="btn" style="float: right;">开始</button>`).appendTo("#article > p");
+        
+                const $board = $(`<span class="window">
+                    
+                    <ul></ul>
+                </span>
+                `).appendTo("#atcboard");
+        
+                var output = document.getElementById('article');
+                var result;
+                $.get(`/js/${window._feInjection.subject}.json`, function(data){
+                    const $ul = $board.children("ul").css("list-style-type", "none");
+                    const $menu = $(`<div id="menu" style="text-align: center;"></div>`).appendTo($ul);
+                    $("<br>").appendTo($ul);
+                    let $menuarr = [], $entries = [], chdata = [];
+        
+                    for (var i = 0; i < data.arr.length; i++) {
+                        if (i == 0) 
+                            $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul));
+                        $menuarr.push($(`<div id="${i}" class="smallbtn-list"></div>`).appendTo($ul).hide());
+                        $entries.push($(`<div class="problem-settings am-unselectable problem-entry">${data.arr[i].name}</div>`).appendTo($menu));
+                        if (!localStorage[window._feInjection.subject]) {
+                            let tmp = [];
+                            for (var j = 0; j < data.arr[i].arr.length; j++) {
+                                tmp.push(false);
+                            }
+                            chdata.push(tmp);
+                        }
+                    }
+        
+                    if (localStorage[window._feInjection.subject]) {
+                        chdata = JSON.parse(localStorage[window._feInjection.subject]);
+                    }
+        
+                    $entries[0].addClass("selected");
+        
+                    function clickmenu ([$entry, $div]) {
+                        $entry.on("click", () => {
+                            $(".problem-entry").removeClass("selected");
+                            $entry.addClass("selected");
+                            $(".smallbtn-list").hide();
+                            $div.show();
+                        });
+                    }
+        
+                    $.double = (func, first, second) => [func(first), func(second)]
+        
+                    function clickitem ([$parent, obj_list, mlist]) {
+                        const $lists = $.double(([classname, desctext]) => $(`<span class="${classname}">
+                        <span class="small inline-up am-unselectable">${desctext}</span>
+                        <br>
+                        </span>`).appendTo($parent), ["problem-enabled", "已选择"], ["problem-disabled", "未选择"])
+        
+                        obj_list.forEach((obj, index) => {
+                            const $btn = $.double(($p) => $(`<div class="am-smallbtn am-unselectable">${obj.name}</div>`).css("background-color", `#3498db`).appendTo($p), $lists[0], $lists[1])
+                            $.double((b) => {
+                                $btn[b].on("click", () => {
+                                    $btn[b].hide()
+                                    $btn[1 - b].show()
+                                    mlist[index] = !! b
+                                    localStorage.setItem(`${window._feInjection.subject}`, JSON.stringify(chdata));
+                                })
+                                if (mlist[index] == (!! b)) $btn[b].hide()
+                            }, 0, 1)
+                        })
+                    }
+        
+                    for (var i = 0; i < data.arr.length; i++) {
+                        clickmenu([$entries[i], $menuarr[i]]);
+                        clickitem([$menuarr[i], data.arr[i].arr, chdata[i]]);
+                    }
+        
+                    function Cog() {
+                        var ques = [];
+        
+                        function startproblem () {
+                            $pboard.empty();
+                            $board.remove();
+        
+                            if (ques.length == 0) {
+                                $pboard.remove();
+                                Swal.fire({
+                                    title: '恭喜！',
+                                    text: '您已做完所有题目！',
+                                    type: 'success',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    localStorage.removeItem("Now");
+                                    BeginProblem();
+                                })
+                                return;
+                            }
+        
+                            localStorage.Now = `{"subject": "${window._feInjection.subject}", "course": "${window._feInjection.course}", "ques": ${JSON.stringify(ques)}}`;
+        
+                            let wflag = 0;
+        
+                            $problemboard = $(`
+                                <p style="font-size: 2em;"></p>
+                            `).appendTo($pboard);
+        
+                            $(`<p style="float: left; -webkit-user-select: none; user-select: none; cursor: pointer; color: #7a7a7a;">还有 ${ques.length} 道题！</p>`).prependTo($pboard);
+                            $cancel = $(`<p style="float: right; -webkit-user-select: none; user-select: none; cursor: pointer; color: #7a7a7a;"><i class="fa fa-times" style="margin-right: 3px"></i>取消答题</p>`).prependTo($pboard);
+                            
+                            $cancel.click(() => {
+                                Swal.fire({
+                                    title: '您确定吗',
+                                    text: "你将重新做题!",
+                                    type: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '是',
+                                    cancelButtonText: '否'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        localStorage.removeItem("Now");
+                                        $pboard.remove();
+                                        BeginProblem();
+                                        Swal.fire({
+                                            type: 'success',
+                                            title: '成功！',
+                                            text: '您已成功取消做题',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                    }
+                                })
+                                return;
+                            });
+        
+                            var len = ques.length - 1;
+                            $problem = $(md.render(`$$\\text{${ques[len].ac[0]}}$$`)).appendTo($problemboard);
+        
+                            $wanswer = [], $aanswer = $(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].ac[0]].zh)}</button>`);
+                            let index = Math.floor(Math.random() * 4);
+                            for (var i = 0; i < ques[len].wr.length; i++) {
+                                if (index == i) $aanswer.appendTo($pboard);
+                                if (data.word[ques[len].wr[i]]) {
+                                    $wanswer.push($(`<button class="btn" style="width: 100%; text-align: left; margin: 3px;">${md.render(data.word[ques[len].wr[i]].zh)}</button>`).appendTo($pboard));
+                                }
+                            }
+                            if (index == 3) $aanswer.appendTo($pboard);
+        
+                            function solution () {
+                                let $sol;
+                                if (data.word[ques[len].ac[0]].so)
+                                $sol = $problemboard.after($(`
+                                <p><strong>解析：</strong></p><div>${md.render(data.word[ques[len].ac[0]].so)}</div>
+                                `));
+                                for (var i = 0; i < ques[len].wr.length; i++) {
+                                    $(`<div style="float: right; color: #a00;">${md.render(`$\\text{${ques[len].wr[i]}}$`)}</div>`).prependTo($wanswer[i]);
+                                }    
+        
+                                $problemboard.after(md.render(`**答案：**<div style="color: #22ab00;">${data.word[ques[len].ac[0]].zh}</div>`));
+                                
+                                if (wflag == 1) {
+                                    let tmp = ques;
+                                    for (var i = 1.0; ques.length - Math.floor(i) - 1 >= 0; i *= 1.65) {
+                                        if (ques[ques.length - Math.floor(i) - 1] == ques[ques.length-1]) continue;
+                                        tmp.splice(ques.length - Math.floor(i) - 1, 0, ques[ques.length-1]);
+                                    }
+                                    ques = tmp;
+                                } 
+                                ques.length--;
+        
+                                $nxtboard = $(`<div style="text-align: center;"></div>`).appendTo($pboard);
+                                $nxt = $(`<button class="btn orange" style="margin: 3px;">${!ques.length? "完成答题": "下一题"}</button>`).appendTo($nxtboard);
+                                $nxt.click(() => {
+                                    startproblem();
+                                })
+                            }
+        
+                            for (var i = 0; i < $wanswer.length; i++) {
+                                $wanswer[i].click(() => {
+                                    if (wflag == 0) {
+                                        wflag = 1;
+                                        Swal.fire({
+                                            type: 'error',
+                                            title: '答错了！',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
+                                        solution(); 
+                                    }
+                                })
+                            }
+        
+                            $aanswer.click(() => {
+                                if (wflag == 0) {
+                                    wflag = 2;
+                                    Swal.fire({
+                                        type: 'success',
+                                        title: '答对了！',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    solution(); 
+                                }
+                            });
+                        }
+                        
+                        if (localStorage.Now) {
+                            let dat = JSON.parse(localStorage.Now);
+                            if (dat.course == "Cognition") {
+                                ques = dat.ques;
+                                startproblem();
+                            } else {
+                                $board.remove();
+                                $pboard.empty();
+                                $(`
+                                    <p>您现在正在做题！</p>
+                                    <a class="btn" href="/${dat.subject}/${dat.course}">返回至题目页面</a>
+                                `).appendTo($pboard);
+                            }
+                        }
+        
+                        $st.click(() => {
+                            for (var i = 0; i < data.arr.length; i++) {
+                                for (var j = 0; j < chdata[i].length; j++)
+                                    for (var k = 0; k < data.arr[i].arr[j].arr.length; k++)
+                                        if (chdata[i][j]) ques.push(data.arr[i].arr[j].arr[k]);
+                            }
+        
+                            function randArr(arr) {
+                                for (var i = 0; i < arr.length; i++) {
+                                    var iRand = parseInt(arr.length * Math.random());
+                                    var temp = arr[i];
+                                    arr[i] = arr[iRand];
+                                    arr[iRand] = temp;
+                                }
+                                return arr;
+                            }
+        
+                            ques = randArr(ques);
+        
+                            if (!ques.length) {
+                                Swal.fire({
+                                    type: 'error',
+                                    title: '很抱歉',
+                                    text: '请先选择范围！',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                // alert("请先选择范围！")
+                            } else {
+                                startproblem();
+                            }
+                        })
+                    }
+        
+                    if (window._feInjection.course == "Cognition") Cog();
+        
+                    // result = md.render(data);
+                    // output.innerHTML = result;
+                });
+            }
+            BeginProblem();
+        } else {
+            $().ready(function() {
+                $(`
+                <div class="container">
                 <div class="atc-index-content atc-center" id="atcboard" style="padding: 0px !important">
                 </div>
-            </div>
-        `).appendTo("#app");
-        $(`
-            <div id="article">
-            </div>
-        `).appendTo("#atcboard");       
-        
-        var output = document.getElementById('article');
-        var result;
-        $.get("./index.txt",function(data){
-            result = md.render(data);
-            output.innerHTML = result;
-        });
-    });
+                </div>
+                `).appendTo("#app");
+                $(`
+                <div id="article">
+                </div>
+                `).appendTo("#atcboard");       
+                
+                var output = document.getElementById('article');
+                var result;
+                $.get("./index.txt",function(data){
+                    result = md.render(data);
+                    output.innerHTML = result;
+                });
+            });
+        }
+    }
+
+    $.ready(load());
 
     /*
     
