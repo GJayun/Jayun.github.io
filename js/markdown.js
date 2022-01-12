@@ -10,6 +10,10 @@
     `).appendTo("body");
 
     function load() {
+        if (window._feInjection.subject=="comment") {
+
+            return ;
+        } 
         if (window._feInjection.course) {
             function BeginProblem() {
                 $(`<style>

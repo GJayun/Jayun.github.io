@@ -1,33 +1,20 @@
-import { setInnerHtml } from './domUtils.js'
-
 export const parseHtmlToContainer = (param, target) => {
   // DOM element
   if (param instanceof HTMLElement) {
     target.appendChild(param)
 
-  // Object
+  // JQuery element(s)
   } else if (typeof param === 'object') {
-    handleObject(param, target)
+    handleJqueryElem(target, param)
 
   // Plain string
   } else if (param) {
-    setInnerHtml(target, param)
-  }
-}
-
-const handleObject = (param, target) => {
-  // JQuery element(s)
-  if (param.jquery) {
-    handleJqueryElem(target, param)
-
-  // For other objects use their string representation
-  } else {
-    setInnerHtml(target, param.toString())
+    target.innerHTML = param
   }
 }
 
 const handleJqueryElem = (target, elem) => {
-  target.textContent = ''
+  target.innerHTML = ''
   if (0 in elem) {
     for (let i = 0; i in elem; i++) {
       target.appendChild(elem[i].cloneNode(true))

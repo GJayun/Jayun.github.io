@@ -15,29 +15,28 @@ export const uniqueArray = (arr) => {
 }
 
 /**
- * Capitalize the first letter of a string
- * @param {string} str
- * @returns {string}
+ * Returns the array ob object values (Object.values isn't supported in IE11)
+ * @param obj
  */
-export const capitalizeFirstLetter = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+export const objectValues = (obj) => Object.keys(obj).map(key => obj[key])
 
 /**
- * @param {NodeList | HTMLCollection | NamedNodeMap} nodeList
- * @returns {array}
+ * Convert NodeList to Array
+ * @param nodeList
  */
 export const toArray = (nodeList) => Array.prototype.slice.call(nodeList)
 
 /**
- * Standardize console warnings
- * @param {string | array} message
+ * Standardise console warnings
+ * @param message
  */
 export const warn = (message) => {
-  console.warn(`${consolePrefix} ${typeof message === 'object' ? message.join(' ') : message}`)
+  console.warn(`${consolePrefix} ${message}`)
 }
 
 /**
- * Standardize console errors
- * @param {string} message
+ * Standardise console errors
+ * @param message
  */
 export const error = (message) => {
   console.error(`${consolePrefix} ${message}`)
@@ -52,7 +51,7 @@ const previousWarnOnceMessages = []
 
 /**
  * Show a console warning, but only if it hasn't already been shown
- * @param {string} message
+ * @param message
  */
 export const warnOnce = (message) => {
   if (!previousWarnOnceMessages.includes(message)) {
@@ -64,7 +63,7 @@ export const warnOnce = (message) => {
 /**
  * Show a one-time console warning about deprecated params/methods
  */
-export const warnAboutDeprecation = (deprecatedParam, useInstead) => {
+export const warnAboutDepreation = (deprecatedParam, useInstead) => {
   warnOnce(`"${deprecatedParam}" is deprecated and will be removed in the next major release. Please use "${useInstead}" instead.`)
 }
 
@@ -74,9 +73,5 @@ export const warnAboutDeprecation = (deprecatedParam, useInstead) => {
  * @param arg
  */
 export const callIfFunction = (arg) => typeof arg === 'function' ? arg() : arg
-
-export const hasToPromiseFn = (arg) => arg && typeof arg.toPromise === 'function'
-
-export const asPromise = (arg) => hasToPromiseFn(arg) ? arg.toPromise() : Promise.resolve(arg)
 
 export const isPromise = (arg) => arg && Promise.resolve(arg) === arg

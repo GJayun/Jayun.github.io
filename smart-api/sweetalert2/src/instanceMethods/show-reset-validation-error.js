@@ -5,18 +5,16 @@ import privateProps from '../privateProps.js'
 // Show block with validation message
 export function showValidationMessage (error) {
   const domCache = privateProps.domCache.get(this)
-  const params = privateProps.innerParams.get(this)
-  dom.setInnerHtml(domCache.validationMessage, error)
-  domCache.validationMessage.className = swalClasses['validation-message']
-  if (params.customClass && params.customClass.validationMessage) {
-    dom.addClass(domCache.validationMessage, params.customClass.validationMessage)
-  }
+  domCache.validationMessage.innerHTML = error
+  const popupComputedStyle = window.getComputedStyle(domCache.popup)
+  domCache.validationMessage.style.marginLeft = `-${popupComputedStyle.getPropertyValue('padding-left')}`
+  domCache.validationMessage.style.marginRight = `-${popupComputedStyle.getPropertyValue('padding-right')}`
   dom.show(domCache.validationMessage)
 
   const input = this.getInput()
   if (input) {
     input.setAttribute('aria-invalid', true)
-    input.setAttribute('aria-describedby', swalClasses['validation-message'])
+    input.setAttribute('aria-describedBy', swalClasses['validation-message'])
     dom.focusInput(input)
     dom.addClass(input, swalClasses.inputerror)
   }
@@ -32,7 +30,7 @@ export function resetValidationMessage () {
   const input = this.getInput()
   if (input) {
     input.removeAttribute('aria-invalid')
-    input.removeAttribute('aria-describedby')
+    input.removeAttribute('aria-describedBy')
     dom.removeClass(input, swalClasses.inputerror)
   }
 }

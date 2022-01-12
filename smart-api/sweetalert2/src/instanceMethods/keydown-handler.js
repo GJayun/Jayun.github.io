@@ -1,8 +1,7 @@
-import * as dom from './utils/dom/index.js'
-import { DismissReason } from './utils/DismissReason.js'
-import { callIfFunction } from './utils/utils.js'
-import { clickConfirm } from './staticMethods/dom.js'
-import privateProps from './privateProps.js'
+import * as dom from '../utils/dom/index.js'
+import { DismissReason } from '../utils/DismissReason.js'
+import { callIfFunction } from '../utils/utils.js'
+import { clickConfirm } from '../staticMethods/dom.js'
 
 export const addKeydownHandler = (instance, globalState, innerParams, dismissWith) => {
   if (globalState.keydownTarget && globalState.keydownHandlerAdded) {
@@ -11,7 +10,7 @@ export const addKeydownHandler = (instance, globalState, innerParams, dismissWit
   }
 
   if (!innerParams.toast) {
-    globalState.keydownHandler = (e) => keydownHandler(instance, e, dismissWith)
+    globalState.keydownHandler = (e) => keydownHandler(instance, e, innerParams, dismissWith)
     globalState.keydownTarget = innerParams.keydownListenerCapture ? window : dom.getPopup()
     globalState.keydownListenerCapture = innerParams.keydownListenerCapture
     globalState.keydownTarget.addEventListener('keydown', globalState.keydownHandler, { capture: globalState.keydownListenerCapture })
@@ -23,7 +22,7 @@ export const addKeydownHandler = (instance, globalState, innerParams, dismissWit
 export const setFocus = (innerParams, index, increment) => {
   const focusableElements = dom.getFocusableElements()
   // search for visible elements and select the next possible match
-  if (focusableElements.length) {
+  for (let i = 0; i < focusableElements.length; i++) {
     index = index + increment
 
     // rollover to first item
@@ -41,21 +40,17 @@ export const setFocus = (innerParams, index, increment) => {
   dom.getPopup().focus()
 }
 
-const arrowKeysNextButton = [
-  'ArrowRight', 'ArrowDown',
+const arrowKeys = [
+  'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+  'Left', 'Right', 'Up', 'Down' // IE11
 ]
 
-const arrowKeysPreviousButton = [
-  'ArrowLeft', 'ArrowUp',
+const escKeys = [
+  'Escape',
+  'Esc' // IE11
 ]
 
-const keydownHandler = (instance, e, dismissWith) => {
-  const innerParams = privateProps.innerParams.get(instance)
-
-  if (!innerParams) {
-    return // This instance has already been destroyed
-  }
-
+const keydownHandler = (instance, e, innerParams, dismissWith) => {
   if (innerParams.stopKeydownPropagation) {
     e.stopPropagation()
   }
@@ -69,11 +64,11 @@ const keydownHandler = (instance, e, dismissWith) => {
     handleTab(e, innerParams)
 
   // ARROWS - switch focus between buttons
-  } else if ([...arrowKeysNextButton, ...arrowKeysPreviousButton].includes(e.key)) {
-    handleArrows(e.key)
+  } else if (arrowKeys.includes(e.key)) {
+    handleArrows()
 
   // ESC
-  } else if (e.key === 'Escape') {
+  } else if (escKeys.includes(e.key)) {
     handleEsc(e, innerParams, dismissWith)
   }
 }
@@ -117,17 +112,15 @@ const handleTab = (e, innerParams) => {
   e.preventDefault()
 }
 
-const handleArrows = (key) => {
+const handleArrows = () => {
   const confirmButton = dom.getConfirmButton()
-  const denyButton = dom.getDenyButton()
   const cancelButton = dom.getCancelButton()
-  if (![confirmButton, denyButton, cancelButton].includes(document.activeElement)) {
-    return
-  }
-  const sibling = arrowKeysNextButton.includes(key) ? 'nextElementSibling' : 'previousElementSibling'
-  const buttonToFocus = document.activeElement[sibling]
-  if (buttonToFocus instanceof HTMLElement) {
-    buttonToFocus.focus()
+  // focus Cancel button if Confirm button is currently focused
+  if (document.activeElement === confirmButton && dom.isVisible(cancelButton)) {
+    cancelButton.focus()
+    // and vice versa
+  } else if (document.activeElement === cancelButton && dom.isVisible(confirmButton)) {
+    confirmButton.focus()
   }
 }
 

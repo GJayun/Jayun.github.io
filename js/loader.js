@@ -7,7 +7,7 @@ $().ready(function() {
 				<i class="fa fa-home"></i>
 				首页
 			</a>
-			<a class="item ${window._feInjection.subject == "comment"? "active": ""}" href="javascript:void(0)">
+			<a class="item ${window._feInjection.subject == "comment"? "active": ""}" href="/comment">
 				<i class="fa fa-comments"></i>
 				讨论
 			</a>

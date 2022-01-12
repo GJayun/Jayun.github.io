@@ -1,81 +1,61 @@
 import { swalClasses } from '../../classes.js'
 import * as dom from '../../dom/index.js'
-import { capitalizeFirstLetter } from '../../utils.js'
 
 export const renderActions = (instance, params) => {
   const actions = dom.getActions()
-  const loader = dom.getLoader()
+  const confirmButton = dom.getConfirmButton()
+  const cancelButton = dom.getCancelButton()
 
   // Actions (buttons) wrapper
-  if (!params.showConfirmButton && !params.showDenyButton && !params.showCancelButton) {
+  if (!params.showConfirmButton && !params.showCancelButton) {
     dom.hide(actions)
-  } else {
-    dom.show(actions)
   }
 
   // Custom class
-  dom.applyCustomClass(actions, params, 'actions')
+  dom.applyCustomClass(actions, params.customClass, 'actions')
 
-  // Render all the buttons
-  renderButtons(actions, loader, params)
-
-  // Loader
-  dom.setInnerHtml(loader, params.loaderHtml)
-  dom.applyCustomClass(loader, params, 'loader')
-}
-
-function renderButtons (actions, loader, params) {
-  const confirmButton = dom.getConfirmButton()
-  const denyButton = dom.getDenyButton()
-  const cancelButton = dom.getCancelButton()
-
-  // Render buttons
+  // Render confirm button
   renderButton(confirmButton, 'confirm', params)
-  renderButton(denyButton, 'deny', params)
+  // render Cancel Button
   renderButton(cancelButton, 'cancel', params)
-  handleButtonsStyling(confirmButton, denyButton, cancelButton, params)
+
+  if (params.buttonsStyling) {
+    handleButtonsStyling(confirmButton, cancelButton, params)
+  } else {
+    dom.removeClass([confirmButton, cancelButton], swalClasses.styled)
+    confirmButton.style.backgroundColor = confirmButton.style.borderLeftColor = confirmButton.style.borderRightColor = ''
+    cancelButton.style.backgroundColor = cancelButton.style.borderLeftColor = cancelButton.style.borderRightColor = ''
+  }
 
   if (params.reverseButtons) {
-    if (params.toast) {
-      actions.insertBefore(cancelButton, confirmButton)
-      actions.insertBefore(denyButton, confirmButton)
-    } else {
-      actions.insertBefore(cancelButton, loader)
-      actions.insertBefore(denyButton, loader)
-      actions.insertBefore(confirmButton, loader)
-    }
+    confirmButton.parentNode.insertBefore(cancelButton, confirmButton)
   }
 }
 
-function handleButtonsStyling (confirmButton, denyButton, cancelButton, params) {
-  if (!params.buttonsStyling) {
-    return dom.removeClass([confirmButton, denyButton, cancelButton], swalClasses.styled)
-  }
-
-  dom.addClass([confirmButton, denyButton, cancelButton], swalClasses.styled)
+function handleButtonsStyling (confirmButton, cancelButton, params) {
+  dom.addClass([confirmButton, cancelButton], swalClasses.styled)
 
   // Buttons background colors
   if (params.confirmButtonColor) {
     confirmButton.style.backgroundColor = params.confirmButtonColor
-    dom.addClass(confirmButton, swalClasses['default-outline'])
-  }
-  if (params.denyButtonColor) {
-    denyButton.style.backgroundColor = params.denyButtonColor
-    dom.addClass(denyButton, swalClasses['default-outline'])
   }
   if (params.cancelButtonColor) {
     cancelButton.style.backgroundColor = params.cancelButtonColor
-    dom.addClass(cancelButton, swalClasses['default-outline'])
   }
+
+  // Loading state
+  const confirmButtonBackgroundColor = window.getComputedStyle(confirmButton).getPropertyValue('background-color')
+  confirmButton.style.borderLeftColor = confirmButtonBackgroundColor
+  confirmButton.style.borderRightColor = confirmButtonBackgroundColor
 }
 
 function renderButton (button, buttonType, params) {
-  dom.toggle(button, params[`show${capitalizeFirstLetter(buttonType)}Button`], 'inline-block')
-  dom.setInnerHtml(button, params[`${buttonType}ButtonText`]) // Set caption text
-  button.setAttribute('aria-label', params[`${buttonType}ButtonAriaLabel`]) // ARIA label
+  dom.toggle(button, params['showC' + buttonType.substring(1) + 'Button'], 'inline-block')
+  button.innerHTML = params[buttonType + 'ButtonText'] // Set caption text
+  button.setAttribute('aria-label', params[buttonType + 'ButtonAriaLabel']) // ARIA label
 
   // Add buttons custom classes
   button.className = swalClasses[buttonType]
-  dom.applyCustomClass(button, params, `${buttonType}Button`)
-  dom.addClass(button, params[`${buttonType}ButtonClass`])
+  dom.applyCustomClass(button, params.customClass, buttonType + 'Button')
+  dom.addClass(button, params[buttonType + 'ButtonClass'])
 }

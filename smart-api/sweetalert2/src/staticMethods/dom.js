@@ -5,18 +5,16 @@ export {
   getContainer,
   getPopup,
   getTitle,
-  getHtmlContainer,
+  getContent,
   getImage,
   getIcon,
-  getInputLabel,
+  getIcons,
   getCloseButton,
   getActions,
   getConfirmButton,
-  getDenyButton,
   getCancelButton,
-  getLoader,
+  getHeader,
   getFooter,
-  getTimerProgressBar,
   getFocusableElements,
   getValidationMessage,
   isLoading
@@ -33,11 +31,6 @@ export const isVisible = () => {
  * Global function to click 'Confirm' button
  */
 export const clickConfirm = () => dom.getConfirmButton() && dom.getConfirmButton().click()
-
-/*
- * Global function to click 'Deny' button
- */
-export const clickDeny = () => dom.getDenyButton() && dom.getDenyButton().click()
 
 /*
  * Global function to click 'Cancel' button

@@ -20,7 +20,7 @@ export default class Timer {
     if (this.running) {
       this.running = false
       clearTimeout(this.id)
-      this.remaining -= new Date().getTime() - this.started.getTime()
+      this.remaining -= new Date() - this.started
     }
     return this.remaining
   }

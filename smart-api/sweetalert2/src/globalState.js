@@ -14,19 +14,16 @@ const focusPreviousActiveElement = () => {
 }
 
 // Restore previous active (focused) element
-export const restoreActiveElement = (returnFocus) => {
+export const restoreActiveElement = () => {
   return new Promise(resolve => {
-    if (!returnFocus) {
-      return resolve()
-    }
     const x = window.scrollX
     const y = window.scrollY
-
     globalState.restoreFocusTimeout = setTimeout(() => {
       focusPreviousActiveElement()
       resolve()
     }, RESTORE_FOCUS_TIMEOUT) // issues/900
-
-    window.scrollTo(x, y)
+    if (typeof x !== 'undefined' && typeof y !== 'undefined') { // IE doesn't have scrollX/scrollY support
+      window.scrollTo(x, y)
+    }
   })
 }

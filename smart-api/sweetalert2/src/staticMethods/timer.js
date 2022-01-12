@@ -1,4 +1,3 @@
-import { animateTimerProgressBar, stopTimerProgressBar } from '../utils/dom/domUtils.js'
 import globalState from '../globalState.js'
 
 /**
@@ -14,10 +13,7 @@ export const getTimerLeft = () => {
  * If `timer` parameter isn't set, returns undefined.
  */
 export const stopTimer = () => {
-  if (globalState.timeout) {
-    stopTimerProgressBar()
-    return globalState.timeout.stop()
-  }
+  return globalState.timeout && globalState.timeout.stop()
 }
 
 /**
@@ -25,11 +21,7 @@ export const stopTimer = () => {
  * If `timer` parameter isn't set, returns undefined.
  */
 export const resumeTimer = () => {
-  if (globalState.timeout) {
-    const remaining = globalState.timeout.start()
-    animateTimerProgressBar(remaining)
-    return remaining
-  }
+  return globalState.timeout && globalState.timeout.start()
 }
 
 /**
@@ -38,7 +30,7 @@ export const resumeTimer = () => {
  */
 export const toggleTimer = () => {
   const timer = globalState.timeout
-  return timer && (timer.running ? stopTimer() : resumeTimer())
+  return timer && (timer.running ? timer.stop() : timer.start())
 }
 
 /**
@@ -46,11 +38,7 @@ export const toggleTimer = () => {
  * If `timer` parameter isn't set, returns undefined.
  */
 export const increaseTimer = (n) => {
-  if (globalState.timeout) {
-    const remaining = globalState.timeout.increase(n)
-    animateTimerProgressBar(remaining, true)
-    return remaining
-  }
+  return globalState.timeout && globalState.timeout.increase(n)
 }
 
 /**
