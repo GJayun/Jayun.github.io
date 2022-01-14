@@ -10,9 +10,24 @@
     `).appendTo("body");
 
     function load() {
-        if (window._feInjection.subject=="comment") {
-
-            return ;
+        if (window._feInjection.subject=="404") {
+            $(`
+                <div class="container">
+                <div class="atc-index-content atc-center" id="atcboard" style="padding: 0px !important">
+                </div>
+                </div>
+                `).appendTo("#app");
+            $(`
+                <div id="article">
+                    <h1>404 Not Found</h1>
+                    <strong>很抱歉……</strong>
+                    当您发现此页面时，可能是相关功能尚未开发！
+                    <div>
+                        <a class="btn" href="javascript:history.back()" style="margin-top:10px;">返回上一页</a>
+                    </div>
+                </div>
+                `).appendTo("#atcboard");
+            return;
         } 
         if (window._feInjection.course) {
             function BeginProblem() {

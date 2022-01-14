@@ -7,9 +7,17 @@ $().ready(function() {
 				<i class="fa fa-home"></i>
 				首页
 			</a>
-			<a class="item ${window._feInjection.subject == "comment"? "active": ""}" href="/comment">
-				<i class="fa fa-comments"></i>
-				讨论
+			<a class="item ${window._feInjection.subject == "Chinese"? "active": ""}" href="/Chinese">
+				<span style="font-family: 'KaTeX_Main';"><strong>中</strong></span>
+				语文
+			</a>
+			<a class="item ${window._feInjection.subject == "English"? "active": ""}" href="/English">
+				<span style="font-family: 'KaTeX_Main';">E</span>
+				英语
+			</a>
+			<a class="item ${window._feInjection.subject == "Morolity-and-Law"? "active": ""}" href="/Morolity-and-Law">
+				<i class="fa fa-book"></i>
+				道德与法治
 			</a>
 		</div>
 	</nav>

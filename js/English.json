@@ -283,7 +283,7 @@
         },
         "awake": {
             "zh": "$v.$ 唤醒 醒着的",
-            "so": "\\text{awoke, awoken}"
+            "so": "$\\text{awoke, awoken}$"
         },
         "away": {
             "zh": "$ad.$  离开；远离"
@@ -302,7 +302,7 @@
         },
         "bad": {
             "zh": "$a.$  坏的； 有害的， 不利 的；严重的",
-            "so": "  比较级 worse,  最高级 worst"
+            "so": "比较级 $\\text{worse}$，最高级 $\\text{worst}"
         },
         "bag": {
             "zh": "$n.$  书包；提包； 袋子"
@@ -340,9 +340,6 @@
         "bathroom": {
             "zh": "$n.$  浴室，盥洗室"
         },
-        "be": {
-            "zh": "$v.$  是（原形），其人称和时 态形式有 $am,  $is,  $are,  $was, $were, $being, $been  ；成为"
-        },
         "beach": {
             "zh": "$n.$  海滨， 海滩"
         },
@@ -351,7 +348,7 @@
         },
         "beat": {
             "zh": "$v.$  敲打；跳 动；打赢 $n.$    （音乐）节拍",
-            "so": "\\text{beat, beaten}"
+            "so": "$\\text{beat, beaten}$"
         },
         "beautiful": {
             "zh": "$a.$  美的，美丽的，美 观的"
@@ -361,7 +358,7 @@
         },
         "become": {
             "zh": "$v.$ 变得；成为",
-            "so": "\\text{became, become}"
+            "so": "$\\text{became, become}$"
         },
         "bed": {
             "zh": "$n.$  床"
@@ -380,7 +377,7 @@
         },
         "begin": {
             "zh": "$v.$   开始，着手",
-            "so": "\\text{began,begun}"
+            "so": "$\\text{began,begun}$"
         },
         "behave": {
             "zh": "$v.$  表现"
@@ -538,7 +535,7 @@
         },
         "bring": {
             "zh": "$vt.$  拿 来，带来， 取来",
-            "so": "\\text{brought, brought}"
+            "so": "$\\text{brought, brought}$"
         },
         "brother": {
             "zh": "$n.$  兄； 弟"
@@ -561,7 +558,7 @@
         },
         "burn": {
             "zh": "$v.$  燃， 烧， 着火；使烧焦；使 晒黑 $n.$  烧伤； 晒伤",
-            "so": "\\text{-ed, -ed} 或 \\text{burnt, burnt}，既有规则也有不规则！"
+            "so": "$\\text{-ed, -ed}$ 或 $\\text{burnt, burnt}$，既有规则也有不规则！"
         },
         "bus": {
             "zh": "$n.$  公共汽车"
@@ -583,7 +580,7 @@
         },
         "buy": {
             "zh": "$vt.$  买",
-            "so": "\\text{bought,bought}"
+            "so": "$\\text{bought,bought}$"
         },
         "by": {
             "zh": "$prep.$  靠近， 在 …… 旁； 在 …… 时间；不迟于；被； 用；由；乘（车）"
