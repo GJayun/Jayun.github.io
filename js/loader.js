@@ -3,6 +3,16 @@ $().ready(function() {
 	$(`
 	<nav class="home">
 		<div class="container">
+			<a class="item " href="/">
+				<div style="display: inline;">	
+					<div class="logo">
+						<img src="/img/icon.bmp">
+					</div>
+					<div class="siteName">
+						JayunWHK
+					</div>
+				</div>
+			</a>
 			<a class="item ${window._feInjection.subject == "home"? "active": ""}" href="/">
 				<i class="fa fa-home"></i>
 				首页

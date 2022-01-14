@@ -1,3 +1,15 @@
+@font-face {
+    font-family: Saira;
+    src: url("/smart-api/fonts/Saira-Medium.ttf");
+    font-weight:normal;
+}
+
+@font-face {
+    font-family: Saira;
+    src: url("/smart-api/fonts/Saira-Bold.ttf");
+    font-weight:bold;
+}
+
 body{
 	margin: 0;
 	background-color: #f5f6f7;
@@ -16,6 +28,32 @@ body{
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.logo {
+    margin-left: -8px;
+    display: inline-block;
+    vertical-align: middle
+}
+
+.logo img {
+    display: block;
+    width: 36px;
+    height: 36px
+}
+
+.siteName {
+    text-align: center;
+    font-size: 20px;
+    font-family: Saira;
+    font-weight: 500!important
+}
+
+.logo, .siteName {
+    margin-left: 3.5px;
+    text-align: left;
+    display: inline-block;
+    vertical-align: middle
 }
 
 #app {
@@ -133,7 +171,6 @@ body{
     transition: opacity .1s ease,background-color .1s ease,color .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
     transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease;
     transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease,-webkit-box-shadow .1s ease;
-    will-change: '';
     -webkit-tap-highlight-color: transparent
 }
 
