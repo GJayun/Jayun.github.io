@@ -36,10 +36,10 @@ body{
     vertical-align: middle
 }
 
-.logo img {
-    display: block;
-    width: 36px;
-    height: 36px
+.logo > * {
+	width: 35px;
+	height: 35px;
+	display: block;
 }
 
 .siteName {
